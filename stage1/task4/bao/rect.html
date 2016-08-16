@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    html, body {
+      height: 100%;
+      width: 100%;
+      /*display: inline-block;*/
+    }
+
+    body {
+      /*display: inline-block;*/
+      position: relative;
+    }
+
+    body div {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+    }
+
+    .rect {
+      transform: translate(-50%, -50%);
+      width: 400px;
+      height: 200px;
+      background-color: #ccc;
+    }
+
+    .quater {
+      width: 50px;
+      height: 50px;
+      background-color: #fc0;
+      z-index: 1;
+    }
+
+    .topleft {
+      border-radius: 0 0 100% 0;
+      margin-left: -200px;
+      margin-top: -100px;
+    }
+
+    .bottomright {
+      border-radius: 100% 0 0 0;
+      /*margin-right: -100px;*/
+      margin-left: 150px;
+      margin-top: 50px;
+    }
+  </style>
+</head>
+<body>
+<div class="quater topleft"></div>
+<div class="rect"></div>
+<div class="quater bottomright"></div>
+
+</body>
+</html>

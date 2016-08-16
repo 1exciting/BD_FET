@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    html,body{
+      height: 100%;
+      width: 100%;
+    }
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .rect {
+      width: 400px;
+      height: 200px;
+      background-color: #ccc;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .quater {
+      width: 50px;
+      height: 50px;
+      background-color: #fc0;
+      z-index: 1;
+    }
+
+    .topleft {
+      border-radius: 0 0 100% 0;
+    }
+
+    .bottomright {
+      border-radius: 100% 0 0 0;
+      align-self: flex-end;
+    }
+  </style>
+</head>
+<body>
+
+<div class="rect">
+  <div class="quater topleft"></div>
+  <div class="quater bottomright"></div>
+</div>
+
+
+</body>
+</html>
