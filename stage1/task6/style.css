@@ -4,34 +4,16 @@
   margin: 0
 }
 
-html{
-  height: 100%;
-  width: 100%;
-}
-
 body{
-  height: 1386px;
-  width: 980px;
 
 }
 
-.container{
-  margin: 0 auto  ;
-  width: 892px;
-}
+/* 第一部分css在这里 */
 
-header{
-  border-bottom: 2px solid #938e8c;
-  width: 892px;
-  height: 63px;
-}
 
-.logo{
-  width: 110px;
-  height: 61px;
-  background-color: #d35e5f;
-  font: 12px "STHeiti", sans-serif;
-  color: #ffffff;
-  padding: 2px;
-  text-align: end;
-}
+
+/* 第二部分css在这里 */
+
+
+
+/* 第三个css在这里 */
