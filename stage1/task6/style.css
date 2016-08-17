@@ -24,14 +24,111 @@ header{
   border-bottom: 2px solid #938e8c;
   width: 892px;
   height: 63px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
 }
 
 .logo{
   width: 110px;
   height: 61px;
   background-color: #d35e5f;
+  align-items: flex-end;
+  display: flex;
+}
+.logo p{
   font: 12px "STHeiti", sans-serif;
   color: #ffffff;
-  padding: 2px;
-  text-align: end;
+  margin: 3px;
 }
+
+time.date{
+  font: 12px "STHeiti", sans-serif;
+  color: #d45c5d;
+
+}
+
+.banner{
+  width: 641px;
+  height: 301px;
+  background: url("./img/banner.jpg") ;
+  display: flex;
+  justify-content: space-between;
+}
+
+.banner .left{
+  width: 191px;
+  height: 301px;
+  background-color: rgba(0, 255, 0,0.2);
+}
+
+
+.banner .right{
+  width: 191px;
+  height: 301px;
+  background-color: rgba(255, 0, 0,0.2);
+}
+
+.about{
+  border-top: 2px solid #cc8091;
+  width: 203px;
+  height: 301px;
+  float: right;
+}
+
+.about h2{
+  font: 24px "Microsoft YaHei", sans-serif;
+  text-decoration: underline;
+  line-height: 40px;
+  text-transform:uppercase;
+}
+
+.about h2:first-letter{
+  font-size: 29px;
+}
+
+.about p{
+  font: italic 12px "STKaiti", sans-serif;
+  line-height: 10px;
+  color: #676767;
+}
+
+.about .number{
+  font: italic 110px "Microsoft YaHei", sans-serif;
+  color: #75b86b;
+  font-weight: 900;
+  margin-top: 30px;
+  margin-left: -10px;
+}
+
+section.top{
+  padding-top: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.about section{
+  display: flex;
+  align-items: flex-end;
+}
+
+.about section .num1{
+  font: 55px "Microsoft YaHei", sans-serif;
+  color: #cc8091;
+}
+
+.about section>div:nth-child(2){
+  padding-bottom: 10px;
+  padding-left: 10px;
+}
+
+.about .note{
+  font: 21px "Microsoft YaHei", sans-serif;
+  color: #cc8091;
+}
+
+.about .comment{
+  font: 12px "Microsoft YaHei", sans-serif;
+  color: #676767;
+}
+
