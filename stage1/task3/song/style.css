@@ -11,7 +11,7 @@ body{
 	margin: 0 auto;
 	overflow: auto;
 	background-color: #eee;
-	min-width: 600px
+	min-width: 300px
 }
 .left{
 	width: 160px;
@@ -35,4 +35,17 @@ body{
 .middle{
 	margin-left: 220px;
 	margin-right:140px;
+}
+@media screen and (max-width: 700px) {
+	.right{
+		width:auto;
+		float: left;
+		clear: both;
+		margin: 10px 0
+	}
+	.middle{
+		clear: both;
+		margin-left: 0;
+		margin-right: 0
+	}
 }
