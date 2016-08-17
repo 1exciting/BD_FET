@@ -132,3 +132,69 @@ section.top{
   color: #676767;
 }
 
+.conleft{
+  width: 415px;
+}
+.the{
+  font: 72px bold;
+  font-style: italic;
+  font-family: 'SimHei';
+  color: #f5e327;
+  margin-right: 10px;
+}
+
+.technologe{
+  font: 42px bold;
+  font-family: 'SimHei';
+  color: #11456b;
+  line-height: 20px;
+  /*margin-left: 10px;*/
+  /*margin: 8px;*/
+}
+.ctitle{
+  font: 33px bold;
+  font-family: 'SimHei';
+  color: #11456b;
+}
+.bor{
+  margin: 20px 0;
+  border-bottom: 2px solid #11456b; 
+}
+.fw{
+  margin: 10px 0;
+}
+.fw span{
+  float: left;
+  font-size: 70px;
+  color: #f5e327;
+  font-family: 'Microsoft YaHei';
+  padding: 0 10px 0 0;
+}
+.fw p{
+  font: 12px 'SimSun';
+  color: #767777;
+}
+.fw .imgs{
+  float:right;
+  padding:15px;
+  width:226px;
+  height:300px;
+}
+.fw .ptwo,.fw .pthree{
+  text-indent:2em;
+}
+
+
+
+
+
+footer{
+  clear:both;
+  width: 892px;
+  border-top: 1px solid #938e8c;
+}
+footer .fife{
+  float: right;
+  font: 12px "SimHei"; 
+  color: #d45d5c; 
+}
