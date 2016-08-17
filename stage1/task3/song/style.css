@@ -1,0 +1,38 @@
+body{
+	padding: 20px;
+	font-family: 'Hiragino Sans GB', 'Microsoft Yahei', '微软雅黑', Arial, sans-serif;
+}
+.main,.left,.right,.middle{
+	border: 1px solid #999;
+	background-color: white;
+	padding: 20px;
+}
+.main{
+	margin: 0 auto;
+	overflow: auto;
+	background-color: #eee;
+	min-width: 600px
+}
+.left{
+	width: 160px;
+	float: left;
+}
+.left .logo{
+	float: left;
+}
+.left .leftContent{
+	margin-left: 100px
+}
+.leftContent h1{
+	font-size: 13px;
+	text-align: center;
+	margin: 0
+}
+.right{
+	width:80px;
+	float: right;
+}
+.middle{
+	margin-left: 220px;
+	margin-right:140px;
+}
