@@ -132,9 +132,16 @@ section.top{
   color: #676767;
 }
 
+.content{
+  margin: 40px 0;
+}
+
 .conleft{
   width: 415px;
+  float: left;
+  margin-bottom: 25px;
 }
+
 .the{
   font: 72px bold;
   font-style: italic;
@@ -160,9 +167,7 @@ section.top{
   margin: 20px 0;
   border-bottom: 2px solid #11456b; 
 }
-.fw{
-  margin: 10px 0;
-}
+
 .fw span{
   float: left;
   font-size: 70px;
@@ -173,6 +178,7 @@ section.top{
 .fw p{
   font: 12px 'SimSun';
   color: #767777;
+  line-height: 16px;
 }
 .fw .imgs{
   float:right;
@@ -184,11 +190,135 @@ section.top{
   text-indent:2em;
 }
 
+.conright{
+  width: 458px;
+  float: right;
+}
 
 
+.right_up img{
+  width: 458px;
+  height: 275px;
+  margin-top: 20px;
+}
 
+.right_up_d{
+  width: 458px;
+  height: 61px;
+  position: absolute;
+  bottom: 12px;
+  background-color: rgba(0,0,0,0.4);
+  line-height: 61px;
+}
+
+.right_up_d span{
+  font: 26px 'Microsoft YaHei'; 
+  height: 44px;
+  color: #fff;
+  border-left: 3px solid #72b16a;
+  margin-left: 45px;
+  padding-left: 15px;
+}
+.right_up_d i{
+    font: italic 12px 'Microsoft YaHei';
+    color: #72b16a;
+    margin-left: 10px;
+}
+
+.right_down{
+  width: 459px;
+  height: 318px;
+  background-color: #EEEED6;
+  margin-top: 25px;
+  padding-top: 1px;
+}
+
+.right_down>p{
+  /*margin-left:20px;*/
+  margin: 26px;
+}
+
+.right_down .pshape{
+   width: 0;
+   height: 0;
+   border-left:5px solid transparent;
+   border-right: 5px solid transparent;
+   border-bottom: 10px solid #10456b;
+   display: inline-block;
+   margin-right: 5px;
+}
+
+.right_down .pspan_one{
+  font: 16px 'SimHei';
+  color: #5a5b5b;
+  text-align: left;
+}
+
+.right_down .pspan_two{
+  font: italic 12px 'SimHei';
+  color: #5a5b5b;
+  text-align: right;
+}
+
+.rd_left{
+  float: left;
+  width: 260px;
+  height: 160px;
+  background-color: #D55D5C;
+}
+.rd_left .zero{
+  font: 110px 'Microsoft YaHei';
+  color: #fff;
+  float: left;
+  padding-left: 10px;
+}
+
+.rd_left .one_two{
+  float: left;
+  height: 86px;
+  border-left: 2px solid #fff;
+  padding-left: 4px;
+  margin-top: 34px;
+}
+.rd_left .ot_big{
+  font: italic 21px 'SimHei';
+  color: #fff;
+  margin-bottom: 10px;
+}
+.rd_left .ot_small{
+  font: 12px 'SimHei';
+  color: #fff;
+  margin: 2px;
+}
+
+.rd_right{
+  float: right;
+  width: 180px;
+  height: 160px;
+  margin-top: 25px;
+
+}
+.rd_right span{
+  font: 72px 'SimHei';
+  color: #d45d5c;
+}
+.rd_right p{
+  font: italic 14px 'SimHei';
+}
+.rd_right .rr_span1{
+  float: left;
+  margin: -18px 10px 0 -40px;
+  height: 30px;
+}
+
+.rd_right .rr_span2{
+  float: right;
+  margin: -5px -18px 0 -40px;
+  height: 30px;
+}
 
 footer{
+  margin-top: 25px;
   clear:both;
   width: 892px;
   border-top: 1px solid #938e8c;
