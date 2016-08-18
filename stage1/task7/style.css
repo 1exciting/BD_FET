@@ -5,7 +5,10 @@
 }
 
 body{
-
+	width: 100%;
+	min-width: 1280px;
+	font-family: '黑体';
+	font-size: 14px;
 }
 
 /* 第一部分css在这里 */
@@ -17,3 +20,279 @@ body{
 
 
 /* 第三个css在这里 */
+.xinshidai{
+	height:521px;
+	width: 100%;
+}
+.xsd-left{
+	float: left;
+	width:33%;
+	background:#e74f4d;
+	height: 100%
+}
+.xsd-mid{
+	float: left;
+	width: 34%;
+	height: 100%;
+	position: relative;
+}
+.xsd-right{
+	float: right;
+	width:33%;
+	height: 100%;
+	background-image: url("imgs/xsd-right.png");
+}
+.s-wenzi{
+	font-family: '黑体';
+	position: relative;
+	top: 30%;
+	text-align: center;
+}
+.s-wenzi p{
+	line-height: 30px;
+	font-size: 24px;
+	color: white;
+}
+.s-wenzi span{
+	display: inline-block;
+	width: 50px;
+	border-top: 2px solid white;
+	webkit-transition: width 0.4s ease-in-out;
+    -moz-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+.s-wenzi:hover span{
+	width: 180px;
+}
+.xinshidai .button{
+	margin-top: 30px;
+}
+.xsd-left .button p{
+	display: inline;
+	font-size: 25px;
+	padding: 12px 30px;
+	border:1px solid white;
+}
+.xsd-left .button p:hover{
+	background:white;
+	color: black;
+}
+.xsd-mid .s-wenzi p{
+	color: black;
+}
+.xsd-mid .s-wenzi span{
+	border-top: 2px solid black;
+}
+.xsd-mid .button p{
+	display: inline;
+	font-size: 25px;
+	padding: 12px 30px;
+	border:1px solid #e74f4d;
+}
+.xsd-mid .button p:hover{
+	background:#e74f4d;
+	color: white;
+}
+.xsd-mid::after{
+	content: '';
+    position: absolute;
+    border-width: 20px;
+    border-color: transparent transparent transparent #fff;
+    border-style: solid;
+    top: 240px;
+    left: 100%;
+}
+.zhiyuanzhe{
+	height: auto;
+	text-align: center;
+	margin-bottom: 100px;
+}
+.zyz-top{
+	margin: 180px 0;
+}
+.zyz-top .s-wenzi p{
+	color: black;
+	font-size: 21px;
+}
+.zyz-top .s-wenzi span{
+	border-top: 2px solid #e74f4d;
+}
+.zyz-top .small-p{
+	margin-top: 12px;
+}
+.zyz-top .small-p p{
+	font-size: 15px;
+	color: #aaa;
+	line-height: 18px;
+}
+.zyz-bottom{
+	position: relative;
+	height: 360px;
+}
+.zyz-left{
+	width:360px;
+	height: 360px;
+	text-align:left;
+	position: absolute;
+	left: 150px;
+}
+.zyz-left .s-mes{
+	width: 350px;
+	height: 130px;
+	margin-top: 10px;
+}
+.zyz-left .s-mes h1{
+	font-size: 19px;
+	color: #96908f;
+	margin-bottom: 15px;
+}
+.zyz-left .s-mes p{
+	color: #c2bfbe;
+	font-size: 15px;
+	line-height: 21px;
+}
+.zyz-left .s-mes span{
+	float: right;
+	cursor: pointer;
+}
+.zyz-right{
+	position: absolute;
+	left: 500px;
+	width: 700px;
+	height: 360px;
+}
+.zyz-right input[type="text"]{
+    height: 40px;
+    width: 300px;
+    font-size: 14px;
+    color: #a59e9c;
+    box-sizing: border-box;
+    margin: 10px;
+    padding: 10px;
+    border: 0;
+    outline: 0;
+    background-color: #E3E3E3;
+    font-family: '宋体'
+}
+.zyz-right textarea{
+    width: 620px;
+    height: 160px;
+    font-size: 14px;
+    color: #a59e9c;
+    box-sizing: border-box;
+    margin: 10px;
+    padding: 10px;
+    border: 0;
+    outline: 0;
+    background-color: #E3E3E3;
+    resize:none;
+    font-family: '宋体';
+    text-indent: 11.5em;
+}
+.zyz-right input[type="submit"]{
+    width: 620px;
+    height: 40px;
+    font-size: 14px;
+    color: #a59e9c;
+    text-align: center;
+    box-sizing: border-box;
+    margin: 10px;
+    border: 0;
+    outline: 0;
+    background-color: #E3E3E3;
+    font-family: '宋体';
+    -webkit-transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+}
+.zyz-right input[type="submit"]:hover{
+    border-radius: 5px;
+    box-shadow: 1px 1px 1px #B3AFAC,-1px -1px 1px #B3AFAC;
+}
+.zyz-right span{
+	font-size: 14px;
+    color: #a59e9c;
+    position: absolute;
+    top: 140px;
+    left: 40px;
+}
+footer{
+	width: 100%;
+	height: 390px;
+}
+.footer-top{
+	height:300px;
+	background: #32353e;
+}
+.footer-top .s-wenzi{
+	top:15%;
+}
+.footer-top .s-wenzi .small-p{
+	margin-top: 20px;
+}
+.footer-top .s-wenzi .small-p p{
+	font-size: 14px;
+	line-height: 21px;
+}
+.footer-top .s-wenzi .s-email{
+	display: inline-flex;
+	margin-top: 27px;
+}
+.footer-top .s-wenzi .s-email input[type="email"] {
+    width: 500px;
+    height: 40px;
+    font-size: 15px;
+    box-sizing: border-box;
+    padding-left: 10px;
+    color: #75757F;
+}
+.footer-top .s-wenzi .s-email input[type="submit"] {
+    width: 100px;
+    height: 40px;
+    font-size: 16px;
+    color: #fff;
+    letter-spacing: 5px;
+    border: 0;
+    box-sizing: border-box;
+    background-color: #75757F;
+    -webkit-transition: background-color 0.4s ease-in-out;
+    -moz-transition: background-color 0.4s ease-in-out;
+    transition: background-color 0.4s ease-in-out;
+    -webkit-appearance: button;
+    cursor: pointer;
+    padding: 1px 6px;
+}
+.footer-top .s-wenzi .s-email input[type="submit"]:hover {
+    background-color: #5E5E68;
+}
+.footer-top .s-wenzi .s-icon{
+	width: 100%;
+    height: 50px;
+    color: #fff;
+    font-size: 30px;
+    display: inline-block;
+    position: relative;
+    top:10px;
+}
+.footer-top .s-wenzi .s-icon i {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    vertical-align: middle;
+    margin: 0;
+    cursor: pointer;
+    -webkit-transition: font-size 0.4s ease-in-out;
+    -moz-transition: font-size 0.4s ease-in-out;
+    transition: font-size 0.4s ease-in-out;
+}
+.footer-top .s-wenzi .s-icon i:hover{
+	font-size: 35px;
+}
+.footer-bottom{
+	height: 90px;
+	background:#303039;
+}
+.footer-bottom .fb-left{
+	
+}
