@@ -76,6 +76,7 @@ body{
 .xsd-left .button p:hover{
 	background:white;
 	color: black;
+	cursor: pointer;
 }
 .xsd-mid .s-wenzi p{
 	color: black;
@@ -92,6 +93,7 @@ body{
 .xsd-mid .button p:hover{
 	background:#e74f4d;
 	color: white;
+	cursor: pointer;
 }
 .xsd-mid::after{
 	content: '';
@@ -218,7 +220,7 @@ body{
 }
 footer{
 	width: 100%;
-	height: 390px;
+	height: auto;
 }
 .footer-top{
 	height:300px;
@@ -290,9 +292,24 @@ footer{
 	font-size: 35px;
 }
 .footer-bottom{
-	height: 90px;
+	height: 40px;
 	background:#303039;
+	padding: 20px 40px 20px 60px;
 }
 .footer-bottom .fb-left{
-	
+	float: left;
+	line-height: 40px;
+	color: white;
+}
+.footer-bottom .fb-right{
+	float: right;
+	line-height: 40px;
+	color: white;
+}
+.footer-bottom .fb-right a{
+	cursor: pointer;
+	transition: color 0.3s ease-in-out;
+}
+.footer-bottom .fb-right a:hover{
+	color: #e4baba
 }
