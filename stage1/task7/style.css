@@ -12,7 +12,36 @@ body{
 }
 
 /* 第一部分css在这里 */
-
+.newheader{
+	height: 40px;
+	line-height: 40px;
+}
+.newworld{
+	float: left;
+}
+.newworld i{
+	color: red;
+	padding:0 10px 0 60px;
+}
+.items{
+	list-style: none;
+	float: right;
+}
+.items li{
+	display: inline-block;
+}
+.items li a{
+	padding: 0 10px;
+	text-align: center;
+	text-decoration: none;
+	font-size: 12px;
+	color: #aaa;
+}
+.login{
+	float: right;
+	padding:0 60px 0 10px;
+	color: red;
+}
 
 
 /* 第二部分css在这里 */
