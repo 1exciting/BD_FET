@@ -1,0 +1,26 @@
+{
+  "name": "bd-fet",
+  "version": "1.0.0",
+  "description": "[tasks](http://ife.baidu.com/task/all)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "run1-8": "gulp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/1exciting/BD_FET.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/1exciting/BD_FET/issues"
+  },
+  "homepage": "https://github.com/1exciting/BD_FET#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-cli": "^1.2.2",
+    "gulp-sass": "^2.3.2",
+    "gulp-sourcemaps": "^1.6.0"
+  }
+}
