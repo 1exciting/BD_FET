@@ -20,5 +20,5 @@ gulp.task('bao-1-8', function () {
 });
 
 gulp.task('bao-1-8:watch', function () {
-    gulp.watch('./stage1/task8/sass/**/*.scss', ['bao-1-8']);
+    gulp.watch('./stage1/task8/bao/sass/**/*.sass', ['bao-1-8']);
 });

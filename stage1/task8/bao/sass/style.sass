@@ -1,3 +1,40 @@
+//@import ~normalize-scss
+
+
+$font-stack: Helvetica, sans-serif
+$grid-columns: 12
+$gutter: 20px
+
 body
-  padding: 0px
-  margin: 0px
+  font: 12px $font-stack
+
+.container
+  width: 100%
+  border: 1px solid #999
+
+.row
+  display: flex
+  flex-wrap: wrap
+  width: 100%
+  margin: 10px auto
+
+=grid($prefix)
+  @for $i from 1 through $grid-columns
+    .col-#{$prefix}-#{$i}
+      width: calc((#{$i} / #{$grid-columns}) * 100% - #{$gutter})
+      margin: $gutter/2
+      height: 50px
+      border: 1px solid #999
+      background-color: #eee
+      padding: 10px
+      box-sizing: border-box
+
+@media (min-width: 769px)
+  +grid(md)
+
+@media (max-width: 768px)
+  +grid(sm)
+
+
+
+
