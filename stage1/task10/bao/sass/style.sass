@@ -1,0 +1,47 @@
+//@import ~normalize-scss
+
+
+$font-stack: Helvetica, sans-serif
+$grid-columns: 12
+$gutter: 20px
+
+body
+  font: 12px $font-stack
+
+.container
+  width: 100%
+  border: 1px solid #999
+  padding: 20px
+  display: flex
+  align-items: center
+  justify-content: space-between
+
+  .box
+    border: 1px solid #f00
+    width: 150px
+    margin: 10px
+    box-sizing: border-box
+    &:nth-child(1)
+      height: 120px
+
+    &:nth-child(2)
+      height: 100px
+    &:nth-child(3)
+      height: 40px
+    &:nth-child(4)
+      height: 200px
+      border-color: #00f
+
+@media (max-width: 640px)
+  .container
+    flex-wrap: wrap
+    align-items: flex-start
+    .box:nth-child(4)
+      order: -1
+
+//@media (max-width: 768px)
+
+
+
+
+

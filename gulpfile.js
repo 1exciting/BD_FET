@@ -22,3 +22,16 @@ gulp.task('bao-1-8', function () {
 gulp.task('bao-1-8:watch', function () {
     gulp.watch('./stage1/task8/bao/sass/**/*.sass', ['bao-1-8']);
 });
+
+
+gulp.task('bao-1-10', function () {
+    return gulp.src('./stage1/task10/bao/sass/**/*.sass')
+        .pipe(sourcemaps.init())
+        .pipe(sass().on('error', sass.logError))
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest('./stage1/task10/bao/css/'));
+});
+
+gulp.task('bao-1-10:watch', function () {
+    gulp.watch('./stage1/task10/bao/sass/**/*.sass', ['bao-1-10']);
+});
