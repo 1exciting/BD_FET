@@ -1,0 +1,40 @@
+$grid-columns : 12;
+
+body{
+	margin:0;
+	padding:0;
+}
+
+.col{
+	width:calc(100% - 20px);
+	height:70px;
+	margin:0 10px;
+}
+
+@mixin grid($prefix){
+  @for $i from 1 through $grid-columns{
+    .col-#{$prefix}-#{$i}{
+      width: calc((#{$i} / #{$grid-columns}) * 100% - 20px);
+      margin: 10px;
+      height: 50px;
+      border: 1px solid #999;
+      background-color: #eee;
+      box-sizing: border-box;
+      float:left;
+  	} 	
+  }
+
+}
+
+
+@media (min-width: 769px){
+	@include grid(md)
+}
+	
+@media (max-width: 768px){
+	@include grid(s)
+}
+
+
+
+
