@@ -1,0 +1,39 @@
+body{
+	padding:0;
+	margin:0;
+}
+.flex{
+	display:flex;
+	@media (min-width: 640px){
+		justify-content space-between
+		align-items center
+	}
+	@media (max-width:639px){
+		align-items flex-start
+		justify-content space-between
+		flex-wrap wrap
+		.div4{
+			order -1
+		}
+	}
+	.div1,.div2,.div3,.div4{
+		width:110px
+		padding:20px
+	}
+	.div1,.div2,.div3{
+		border:1px solid #f00;
+	}
+	.div4{
+		border:1px solid #0f0;
+		height:160px;
+	}
+	.div1{
+		height:80px
+	}
+	.div2{
+		height:60px;
+	}
+	.div3{
+		height:0px;
+	}
+}

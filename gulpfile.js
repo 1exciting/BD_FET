@@ -8,7 +8,7 @@ var rename = require('gulp-rename');
 var minifycss = require('gulp-minify-css');
 var stylus = require('gulp-stylus');
 
-gulp.task('default', ['song_scss', 'song_watch']);
+gulp.task('default', ['song_stylu', 'song_watch']);
 
 gulp.task('bao-1-8', function () {
     return gulp.src('./stage1/task8/bao/sass/**/*.sass')
@@ -52,17 +52,20 @@ gulp.task('1-9:watch', function () {
  * song contron here
  */
 var song_paths = {
-    task8_scss: "stage1/task8/song/scss/*.scss",
-    task8_scss_dest: "stage1/task8/song/css"
+    task_stylus: "stage1/task10/song/stylus/*.styl",
+    task_stylus_dest: "stage1/task10/song/css"
 }
-gulp.task("song_scss", function () {
-    gulp.src(song_paths.task8_scss)
-        .pipe(sass())
-        .pipe(gulp.dest(song_paths.task8_scss_dest))
+
+gulp.task('song_stylu', function () {
+    return gulp.src(song_paths.task_stylus)
+        .pipe(sourcemaps.init())
+        .pipe(stylus())
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest(song_paths.task_stylus_dest))
         .pipe(rename({suffix: '.min'}))
         .pipe(minifycss())
-        .pipe(gulp.dest(song_paths.task8_scss_dest));
+        .pipe(gulp.dest(song_paths.task_stylus_dest));
 });
 gulp.task("song_watch", function () {
-    gulp.watch(song_paths.task8_scss, ['song_scss']);
+    gulp.watch(song_paths.task_stylus, ['song_stylu']);
 });
