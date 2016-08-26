@@ -8,7 +8,7 @@ var rename = require('gulp-rename');
 var minifycss = require('gulp-minify-css');
 var stylus = require('gulp-stylus');
 
-gulp.task('default', ['song_stylu', 'song_watch']);
+gulp.task('default', ['1-9', 'song_watch']);
 
 gulp.task('bao-1-8', function () {
     return gulp.src('./stage1/task8/bao/sass/**/*.sass')
@@ -53,7 +53,9 @@ gulp.task('1-9:watch', function () {
  */
 var song_paths = {
     task_stylus: "stage1/task10/song/stylus/*.styl",
-    task_stylus_dest: "stage1/task10/song/css"
+    task_stylus_dest: "stage1/task10/song/css",
+    task1_9_stylus:"stage1/task9/stylus/*.styl",
+    task1_9_stylus_dest:"stage1/taks9/css"
 }
 
 gulp.task('song_stylu', function () {
@@ -67,5 +69,5 @@ gulp.task('song_stylu', function () {
         .pipe(gulp.dest(song_paths.task_stylus_dest));
 });
 gulp.task("song_watch", function () {
-    gulp.watch(song_paths.task_stylus, ['song_stylu']);
+    gulp.watch(song_paths.task1_9_stylus, ['1-9']);
 });
