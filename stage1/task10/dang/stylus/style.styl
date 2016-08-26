@@ -1,0 +1,31 @@
+body
+	padding 0
+	margin 0
+
+.container
+	display flex
+	justify-content space-between
+	align-items center
+	border 1px solid #999
+	padding 20px
+
+	.box1,.box2,.box3,.box4
+		width 150px
+		box-sizing border-box
+		border 1px solid #999
+		margin 10px
+	.box1
+		height 120px
+	.box2
+		height 100px
+	.box3
+		height 40px
+	.box4
+		height 200px
+		border 1px solid #0f0 !important
+
+	@media (max-width: 640px)
+		flex-wrap wrap
+		align-items: flex-start
+		.box4
+			order -1
