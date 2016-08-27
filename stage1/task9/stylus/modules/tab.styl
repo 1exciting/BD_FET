@@ -1,4 +1,4 @@
-ourtab(width, height)
+panel(width, height)
   box-sizing border-box
   height height
   width width
@@ -20,4 +20,30 @@ ourtab(width, height)
     font-size 12px
 
   .content
-    margin 20px
+    margin 10px 20px
+
+dropbox(dropdown = true)
+  div
+    @extend .justify
+    text-align center
+    width (100 / 5) %
+    &:nth-of-type(3)
+      width (100 / 4)%
+    border 1px solid #cacbcb
+    line-height 20px
+    //padding-left 3 px
+
+    span
+      width 100%
+
+    &:hover
+      cursor pointer
+
+    //&:nth-of-type(2)
+      //f
+
+    i
+      width 20px
+      height 20px
+      border-left 1px solid #f5f6f7
+      background url(../imgs/select_down.png) no-repeat center

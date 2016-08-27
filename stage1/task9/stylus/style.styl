@@ -1,18 +1,17 @@
 @require 'modules/tab.styl'
+@require 'vars.styl'
 
 body
   margin 0px
   font-size 12px
-
-body {
+  font-family: "SimHei", "Microsoft Yahei", "Arial"
   padding: 0px
   width 1280px
-}
 
 /*
  * first part : song
 */
-header {
+header#page {
   font-family "SimHei", "Microsoft Yahei", "Arial"
   background #2189bf
   width 100%
@@ -57,7 +56,7 @@ header {
   }
 }
 
-.song-section {
+section#song {
   font-family "SimHei", "Microsoft Yahei", "Arial"
   width 100%
   height 1210px
@@ -129,17 +128,58 @@ header {
   flex-wrap wrap
 
 section#project1-1
-  ourtab(532px, 360px)
+  panel(532px, 360px)
 
 /*
  * third part here
 */
 
 section#project1-2
-  ourtab 352px, 360px
+  panel 352px, 360px
 
 section#cal
-  ourtab(352px, 360px)
+  panel(352px, 360px)
+
+  .content .dropdown
+    @extend .justify
+    dropbox true
+
+  .content header ul
+    @extend .justify
+    padding 0
+    border-bottom 1px solid #ececed
+    border-top 1px solid #a9cfec
+    line-height 30px
+
+    li
+      list-style none
+      text-align center
+      width (100 / 7) %
+
+  .content .day
+    @extend .justify
+    flex-wrap wrap
+
+    p
+      text-align center
+      box-sizing border-box
+      line-height 20px
+      width (100 / 7) %
+      //width @w - 1px
+      border 1px solid #fff
+      margin 1px 0
+      display flex
+      flex-direction column
+
+      &.make
+        @extend .yellow-border
+
+      &:hover
+        @extend .yellow-border
+
+      &:nth-of-type(7n-1), &:nth-of-type(7n)
+        span
+          color #cd3539
 
 section#brand
-  ourtab(532px, 360px)
+  panel(532px, 360px)
