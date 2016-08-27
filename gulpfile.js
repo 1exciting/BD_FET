@@ -37,7 +37,7 @@ gulp.task('bao-1-10:watch', function () {
 
 
 gulp.task('1-9', function () {
-    return gulp.src('./stage1/task9/stylus/*.styl')
+    return gulp.src('./stage1/task9/stylus/style.styl')
         .pipe(sourcemaps.init())
         .pipe(stylus())
         .pipe(sourcemaps.write())
@@ -45,7 +45,7 @@ gulp.task('1-9', function () {
 });
 
 gulp.task('1-9:watch', function () {
-    gulp.watch('./stage1/task9/stylus/*/*.styl', ['1-9']);
+    gulp.watch('./stage1/task9/stylus/**/*.styl', ['1-9']);
 });
 
 /**
