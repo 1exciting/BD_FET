@@ -296,6 +296,9 @@ section#cal
     @extend .justify
     dropbox true
 
+  .content header
+    margin-top 10px
+
   .content header ul
     @extend .justify
     padding 0
@@ -335,3 +338,28 @@ section#cal
 
 section#brand
   panel(532px, 360px)
+
+  table
+    width 90%
+    margin 0 auto
+
+    tr, th
+      @extend .text-normal
+
+    tbody
+      tr
+        &:hover
+          background-color #eee
+
+        td
+          &:nth-child(1)
+            width 66px
+
+          &:nth-child(2)
+            width 66px
+
+          &:nth-child(3)
+            padding-left 35px
+
+            div
+              display inline-block

@@ -2,8 +2,6 @@
   display flex
   justify-content space-between
 
-
-
 .yellow-border
   border 1px solid #f5c21d
   cursor pointer
@@ -11,3 +9,15 @@
 .holiday
   color #cd3539
 
+.text-normal
+  line-height 24px
+  text-align center
+
+.progress_bar
+  for p in range(0, 100, 5)
+    if p >= 60
+      .w{p}_perc
+        processbar((p) %, true)
+    else
+      .w{p}_perc
+        processbar((p) %, false)
