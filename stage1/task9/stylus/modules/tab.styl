@@ -6,6 +6,7 @@ panel(width, height)
   border-radius 5px
   border: 1px solid #ced1d4
   margin 10px 0
+  //position relative
 
   h3
     height 41px
@@ -20,7 +21,12 @@ panel(width, height)
     font-size 12px
 
   .content
-    margin 10px 20px
+    margin 15px 20px
+
+//position absolute
+//top 50%
+//left 50%
+//transform translate(-50%,-50%)
 
 dropbox(dropdown = true)
   div
@@ -28,7 +34,7 @@ dropbox(dropdown = true)
     text-align center
     width (100 / 5) %
     &:nth-of-type(3)
-      width (100 / 4)%
+      width (100 / 4) %
     border 1px solid #cacbcb
     line-height 20px
     //padding-left 3 px
@@ -40,10 +46,19 @@ dropbox(dropdown = true)
       cursor pointer
 
     //&:nth-of-type(2)
-      //f
+    //f
 
     i
       width 20px
       height 20px
       border-left 1px solid #f5f6f7
       background url(../imgs/select_down.png) no-repeat center
+
+processbar(percentage, top3 = false)
+  width 168px
+  height 4px
+  margin 0 10px
+
+  $color = top3 ? #ec6d51:#7ecaf0
+
+  background linear-gradient(to right, $color percentage, #dcdcdc percentage)
