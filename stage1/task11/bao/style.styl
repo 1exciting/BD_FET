@@ -1,0 +1,60 @@
+px2em($px, $base-font-size = 75px)
+  if unit($px) == ''
+    warn("Assuming " + $px + " to be in pixels, attempting to convert it into pixels for you")
+    return px2em(($px) px)
+  else if unit($px) == 'rem'
+    return $px
+  else
+    return ($px / $base-font-size) rem
+
+data-dpr($key, $val)
+  [data-dpr="1"] &
+    {$key} $val
+
+  [data-dpr="2"] &
+    {$key} $val * 2
+
+  [data-dpr="3"] &
+    {$key} $val * 3
+
+font-dpr($font-size)
+  data-dpr(font-size, $font-size)
+
+$text-color = #f5f5f5
+$main-color = #91D4DA
+$border-color = #ECECEC
+$border = px2em(5px) solid $border-color
+
+html, body
+  margin 0px
+  font-dpr 12px
+  font-family: "Helvetica Neue", Helvetica, STHeiTi, sans-serif;
+  padding: 0px
+  background-color: #F5F5F5;
+  color: #333;
+
+header.top
+  height px2em(86px)
+  line-height px2em(86px)
+  position relative
+
+  a
+    position absolute
+    top 0
+    left px2em(22.5px)
+    text-decoration none
+    //width px2em(86px)
+    font-dpr 16px
+    color $text-color
+
+    img
+      display inline
+      data-dpr height 20px
+      //height px2em(20)
+      vertical-align middle
+
+  h1
+    text-align center
+    background-color $main-color
+    color #f5f5f5
+    font-dpr 16px

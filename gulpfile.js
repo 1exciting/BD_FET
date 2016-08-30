@@ -48,14 +48,34 @@ gulp.task('1-9:watch', function () {
     gulp.watch('./stage1/task9/stylus/**/*.styl', ['1-9']);
 });
 
+/*
+ bao
+ */
+
+const bao_path = {
+    task1_11_stylus: "./stage1/task11/bao/style.styl",
+    task1_11_stylus_dest: "./stage1/task11/bao/css/"
+}
+
+gulp.task('bao_stylus', function () {
+    return gulp.src(bao_path.task1_11_stylus)
+        .pipe(sourcemaps.init())
+        .pipe(stylus())
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest(bao_path.task1_11_stylus_dest));
+});
+gulp.task("bao_watch", function () {
+    gulp.watch(bao_path.task1_11_stylus, ['bao_stylus'])
+})
+
 /**
  * song contron here
  */
 var song_paths = {
     task_stylus: "stage1/task10/song/stylus/*.styl",
     task_stylus_dest: "stage1/task10/song/css",
-    task1_9_stylus:"stage1/task9/stylus/*.styl",
-    task1_9_stylus_dest:"stage1/taks9/css"
+    task1_9_stylus: "stage1/task9/stylus/*.styl",
+    task1_9_stylus_dest: "stage1/taks9/css"
 }
 
 gulp.task('song_stylu', function () {
