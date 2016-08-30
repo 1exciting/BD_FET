@@ -23,14 +23,19 @@ font-dpr($font-size)
 $text-color = #f5f5f5
 $main-color = #91D4DA
 $border-color = #ECECEC
-$border = px2em(5px) solid $border-color
+$myborder = px2em(3px) solid $border-color
+
+childcenter
+  display flex
+  justify-content center
+  align-items center
 
 html, body
   margin 0px
   font-dpr 12px
   font-family: "Helvetica Neue", Helvetica, STHeiTi, sans-serif;
   padding: 0px
-  background-color: #F5F5F5;
+  //background-color: #F5F5F5;
   color: #333;
 
 header.top
@@ -58,3 +63,78 @@ header.top
     background-color $main-color
     color #f5f5f5
     font-dpr 16px
+
+nav ul
+  display flex
+  justify-content space-between
+  height px2em(86px)
+  line-height px2em(86px)
+
+  li
+    flex 1
+    text-align center
+
+    &.active
+      border-bottom px2em(5px) solid $main-color
+
+body > img
+  height px2em(410px)
+
+div.labels > ul
+  display flex
+  justify-content space-between
+  box-sizing border-box
+  height px2em(227px)
+  margin 0 px2em(22.5px)
+  border-bottom $myborder
+
+  li
+    flex 1
+    //padding px2em(37.5px) px2em(25px)
+    text-align center
+    padding px2em(33px) 0
+    display flex
+    justify-content space-around
+    flex-direction column
+
+    figure
+      height px2em(90px)
+      width px2em(90px)
+      //padding 0 px2em(22.125px)
+      background-color #00C7D6
+      border-radius 100%
+      margin 0 auto
+      @extend childcenter
+
+      img
+        width px2em(45.75px)
+        height px2em(60px)
+
+section.columns > ul
+  margin px2em(30px) 0
+  height px2em(315.75px)
+  display flex
+
+  li
+    flex 1
+    //@extend childcenter
+    display flex
+    flex-direction column
+    justify-content space-around
+    text-align center
+
+    &:not(:last-child)
+      border-right $myborder
+
+    figure
+      height px2em(150px)
+      @extend childcenter
+
+      img
+        width px2em(135.7px)
+
+    h2
+      font-dpr 18px
+    h3
+      font-dpr 14px
+      color #5B5B5B
