@@ -1,0 +1,49 @@
+div.aqi-chart-wrap
+  //height 600px
+  //width 1200px
+  margin 50px auto
+  padding 0 10px
+  width 1200px
+
+  //border 1px solid #8c8c8c
+  box-shadow 0px 0px 5px #999
+  border-radius 15px
+
+  h1
+    //margin 10px auto
+    text-align center
+    font-size 20px
+    line-height 20px
+    padding 20px
+
+div.aqi-chart-wrap ul
+  display flex
+  //position relative
+  justify-content space-around
+
+  li
+    position relative
+    height 600px
+
+    .bar
+      position absolute
+      left 50%
+      cursor pointer
+
+    .bar:hover ~ .info
+      visibility visible
+
+    .info
+      visibility hidden
+      position absolute
+      left -55px
+      width: 120px
+      border: 1px solid #16324a;
+      background-color: white;
+      font-size: .75rem;
+      line-height: 20px;
+      text-align: center;
+      border-radius: 5px;
+      box-shadow: 0px 0px 5px #dddddd;
+      opacity: .8;
+      z-index 100
