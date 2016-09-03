@@ -64,6 +64,7 @@ const graTimeMap = {
 
 /**
  * 渲染图表
+ * 从pageState 读取数据
  */
 function renderChart() {
 	const chart = document.querySelector("div.aqi-chart-wrap")
@@ -84,12 +85,40 @@ function renderChart() {
 /**
  * 日、周、月的radio事件点击时的处理函数
  */
-function graTimeChange() {
+function graTimeChange(opt) {
 	// 确定是否选项发生了变化
-
+	if (opt === pageState.nowGraTime) {
+		return
+	}
 	// 设置对应数据
+	if (opt === 1) {
+		chartData = aqiSourceData[pageState.nowSelectCity]
+	} else if (opt === 2) {
+		//92 ri
+		// let retArr = []
+		const dataSource = aqiSourceData[pageState.nowSelectCity]
+		const breakPoint = 7
+		let count = 0
+		Object.keys(dataSource)
+			.map((x)=>x.slice(0, 7))
+			.forEach(function (cur, idx, arr) {
+				if (idx === 0) {
+					return
+				}
+				if (arr[idx - 1] === cur) {
+					let key = cur + (count / breakPoint + 1).toString()
+					key in chartData ? chartData[key] += dataSource[cur] : chartData[key] = 0
+					count++
+				} else {
+					count = 0
+				}
+			})
+	}
+
 
 	// 调用图表渲染函数
+
+	renderChart()
 }
 
 /**
