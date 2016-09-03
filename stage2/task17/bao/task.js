@@ -58,7 +58,9 @@ var pageState = {
 }
 
 const graTimeMap = {
-	'day': '每日'
+	'day': '每日',
+	'month': '每月',
+	'week': "每周"
 }
 
 
@@ -68,7 +70,7 @@ const graTimeMap = {
  */
 function renderChart() {
 	const chart = document.querySelector("div.aqi-chart-wrap")
-	const h1 = chart.getElementsByTagName('h1')[0]
+	const h1 = document.createElement('h1')
 	h1.textContent = pageState.nowSelectCity + '01-03月' + graTimeMap[pageState.nowGraTime] + '空气质量报告'
 	const ul = document.createElement('ul')
 	let li = ''
@@ -79,6 +81,9 @@ function renderChart() {
 		li += `<li style="width:${width * 2}+px "><div class="bar" style="top:${600 - chartData[key]}px;height:${chartData[key]}px;width:${width}px;background-color: ${colors[idx++ % 12]}"></div><div class="info" style="bottom:${chartData[key] + 10 }px; ">${key}<br>[aqi]${chartData[key]}</div></li>`
 	}
 	ul.innerHTML = li
+	// chart.removeChild(chart.getElementsByTagName('ul')[0])
+	chart.innerHTML = ""
+	chart.appendChild(h1)
 	chart.appendChild(ul)
 }
 
@@ -90,46 +95,30 @@ function graTimeChange(opt) {
 	if (opt === pageState.nowGraTime) {
 		return
 	}
-	// 设置对应数据
-	if (opt === 1) {
-		chartData = aqiSourceData[pageState.nowSelectCity]
-	} else if (opt === 2) {
-		//92 ri
-		// let retArr = []
-		const dataSource = aqiSourceData[pageState.nowSelectCity]
-		const breakPoint = 7
-		let count = 0
-		Object.keys(dataSource)
-			.map((x)=>x.slice(0, 7))
-			.forEach(function (cur, idx, arr) {
-				if (idx === 0) {
-					return
-				}
-				if (arr[idx - 1] === cur) {
-					let key = cur + (count / breakPoint + 1).toString()
-					key in chartData ? chartData[key] += dataSource[cur] : chartData[key] = 0
-					count++
-				} else {
-					count = 0
-				}
-			})
-	}
 
+	pageState.nowGraTime = ['day', 'week', 'month'][opt]
+	// 设置对应数据
+	initAqiChartData();
 
 	// 调用图表渲染函数
 
 	renderChart()
 }
 
+
 /**
  * select发生变化时的处理函数
  */
 function citySelectChange() {
 	// 确定是否选项发生了变化
-
+	if (pageState.nowSelectCity == this.value) {
+		return
+	}
+	pageState.nowSelectCity = this.value
 	// 设置对应数据
-
+	initAqiChartData();
 	// 调用图表渲染函数
+	renderChart();
 }
 
 /**
@@ -138,18 +127,24 @@ function citySelectChange() {
 function initGraTimeForm() {
 	const radio = document.getElementsByName('gra-time')
 	for (let i = 0; i < radio.length; i++)(function (m) {
-		radio[m].addEventListener('click', graTimeChange(m))
+		radio[m].addEventListener('click', graTimeChange.bind(null, m))
 	})(i)
+
 }
 
 /**
  * 初始化城市Select下拉选择框中的选项
  */
 function initCitySelector() {
+	const select = document.getElementById('city-select')
 	// 读取aqiSourceData中的城市，然后设置id为city-select的下拉列表中的选项
-
+	var citys = '';
+	for (var item in aqiSourceData) {
+		citys += `<option>${item}</option>`;
+	}
+	select.innerHTML = citys;
 	// 给select设置事件，当选项发生变化时调用函数citySelectChange
-
+	select.addEventListener('change', citySelectChange)
 }
 
 /**
@@ -158,8 +153,55 @@ function initCitySelector() {
 function initAqiChartData() {
 	// 将原始的源数据处理成图表需要的数据格式
 	// 处理好的数据存到 chartData 中
-	chartData = aqiSourceData[pageState.nowSelectCity]
-	renderChart()
+	chartData = {}
+
+	if (pageState.nowGraTime === 'day') {
+		chartData = aqiSourceData[pageState.nowSelectCity]
+	} else if (pageState.nowGraTime === 'week') {
+		//92 ri
+		// let retArr = []
+		const dataSource = aqiSourceData[pageState.nowSelectCity]
+		const breakPoint = 7
+		let count = 0
+		Object.keys(dataSource)
+			.forEach(function (cur, idx, arr) {
+				if (idx === 0) {
+					return
+				}
+				if (arr[idx - 1].slice(0, 7) === cur.slice(0, 7)) {
+
+					let key = cur.slice(0, 7) + ' week ' + (Math.floor(count / breakPoint) + 1).toString()
+					key in chartData ? chartData[key] += dataSource[cur] : chartData[key] = 0
+					count++
+				} else {
+					count = 0
+				}
+			})
+		Object.keys(chartData).forEach((key)=> {
+			chartData[key] /= 7
+		})
+	} else {
+		const dataSource = aqiSourceData[pageState.nowSelectCity]
+		let counter = {}
+		Object.keys(dataSource)
+			.forEach((cur)=> {
+				let month = cur.slice(0, 7)
+				if (month in chartData) {
+					chartData[month] += dataSource[cur]
+				} else {
+					chartData[month] = 0
+				}
+				if (month in counter) {
+					counter[month]++
+				} else {
+					counter[month] = 0
+				}
+			})
+		Object.keys(chartData)
+			.forEach((key)=> {
+				chartData[key] = (chartData[key] / counter[key]).toFixed(2)
+			})
+	}
 }
 
 /**
@@ -169,6 +211,7 @@ function init() {
 	initGraTimeForm()
 	initCitySelector();
 	initAqiChartData();
+	renderChart()
 }
 
 init();
