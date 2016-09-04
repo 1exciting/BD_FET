@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    figure.box {
+      background-color: red;
+      min-width: 30px;
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+      margin: 10px 10px;
+    }
+
+    section.q {
+      display: flex;
+      /*margin: 20px 20px;*/
+    }
+  </style>
+</head>
+<body>
+<section class="control">
+  <input id="number" type="text"/>
+  <button> 左侧入</button>
+  <button> 右侧入</button>
+  <button> 左侧出</button>
+  <button> 右侧出</button>
+</section>
+<section class="q" id="queue">
+  <!--<figure class="box">10</figure>-->
+</section>
+</body>
+<script>
+  //事件绑定函数，兼容浏览器差异
+  function addEvent(element, event, listener) {
+    if (element.addEventListener) {
+      element.addEventListener(event, listener, false);
+    }
+    else if (element.attachEvent) {
+      element.attachEvent("on" + event, listener);
+    }
+    else {
+      element["on" + event] = listener;
+    }
+  }
+
+  function Queue(initial, root) {
+    this.arr = []
+    this.root = root
+
+    initial = initial || []
+    initial.forEach((x)=>this.pushRight(x))
+  }
+
+  Queue.prototype.pushLeft = function () {
+    let n = parseInt(document.getElementById('number').value)
+
+    let figure = document.createElement('figure')
+    figure.className = 'box'
+    figure.appendChild(document.createTextNode(n))
+//    this.root.childNodes = [].unshift.call(this.root.childNodes, figure)
+    this.root.firstChild ? this.root.insertBefore(figure, this.root.firstChild) : this.root.appendChild(figure)
+    this.arr.unshift(n)
+
+  }
+
+  Queue.prototype.pushRight = function (x) {
+    let n = parseInt(document.getElementById('number').value) || x
+
+    let figure = document.createElement('figure')
+    figure.className = 'box'
+    figure.appendChild(document.createTextNode(n))
+
+    this.root.appendChild(figure)
+    this.arr.push(n)
+  }
+
+  Queue.prototype.popLeft = function () {
+    alert(this.arr.shift())
+    this.root.removeChild(this.root.firstElementChild)
+  }
+
+  Queue.prototype.popRight = function () {
+    alert(this.arr.pop())
+    this.root.removeChild(this.root.lastElementChild)
+  }
+
+  const root = document.getElementById('queue')
+
+  let q = new Queue([10, 20], root)
+
+  const buttons = document.getElementsByTagName('button')
+  addEvent(buttons[0], 'click', Queue.prototype.pushLeft.bind(q))
+  addEvent(buttons[1], 'click', Queue.prototype.pushRight.bind(q))
+  addEvent(buttons[2], 'click', Queue.prototype.popLeft.bind(q))
+  addEvent(buttons[3], 'click', Queue.prototype.popRight.bind(q))
+
+  addEvent(root, 'click', function (e) {
+    if (e.target && e.target.nodeName.toLowerCase() === 'figure') {
+//      [].forEach.app childNodes
+//      e.target
+//      root.childElementCount
+      let removeIdx = -1
+      let offsetLeft = e.x - e.offsetX
+          ;
+
+      for (let i = 0; i < root.childNodes.length; i++) {
+        let node = root.childNodes[i]
+        if (node.nodeType === 1) {
+          removeIdx++
+
+          if (node.offsetLeft === offsetLeft) {
+            q.arr.splice(removeIdx, 1)
+            root.removeChild(e.target)
+            break
+          }
+        }
+      }
+    }
+  })
+</script>
+</html>

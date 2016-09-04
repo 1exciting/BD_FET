@@ -28,5 +28,5 @@
     + task16
         * [x] bao
     + task 17
-        * [x] [bao](http://htmlpreview.github.io/?https://github.com/1exciting/BD_FET/blob/master/stage2/task17/bao/task.html)
+        * [x] [bao](https://1exciting.github.io/BD_FET/stage2/task17/bao/task.html)
     
