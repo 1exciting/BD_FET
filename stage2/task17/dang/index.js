@@ -53,7 +53,7 @@ var pageState = {
 
 var formGraTime = document.getElementById('form-gra-time'),
     citySelect = document.getElementById('city-select'),
-    aqiChartWrap = document.getElementsByClassName('aqi-chart-wrap')[0];
+    aqiChartWrap = document.getElementsByClassName("aqi-chart-wrap")[0];
 
 //事件绑定
 function addEventHandler(element,type,handler){
@@ -71,13 +71,13 @@ function addEventHandler(element,type,handler){
  */
 function renderChart() {
     var color = '',
-        html = '';
+        innerhtml = '';
     console.log(chartData);
     for(var item in chartData){
         color = '#' + Math.floor(Math.random() * 0xFFFFFF).toString(16);
-    	html += '<div title="'+item+":"+chartData[item]+'" style="height:'+chartData[item]+'px; background-color:'+color+'"></div>';
+    	innerhtml += `<div title="${item}:${chartData[item]}" style="height:${chartData[item]}px; background-color:${color}"></div>`;
      }
-    aqiChartWrap.innerHTML = html;
+    aqiChartWrap.innerHTML = innerhtml;
 }
 
 /**
@@ -137,10 +137,48 @@ function initAqiChartData() {
   // 将原始的源数据处理成图表需要的数据格式
   // 处理好的数据存到 chartData 中
   var nowCityData = aqiSourceData[pageState.nowSelectCity];
-  if (pageState.nowGraTime==='day') {
-  	chartData = nowCityData;
-  }else if (pageState.nowGraTime==='week') {}
-  	chartData = {};
+  var type = pageState.nowGraTime;
+  switch(type){
+  	case "day":
+  		chartData = nowCityData;
+  		break;
+  	case "week":
+  		chartData = {};
+  		let countSum = 0,countDay = 0, countWeek=0;
+  		for(let item in nowCityData){
+  			countSum += nowCityData[item];
+  			countDay++;
+  			if (new Date(item).getDay()===6) {
+  				countWeek++;
+  				chartData['第'+countWeek+'周'] = Math.floor(countSum/countDay);
+  				countSum = 0;
+  				countDay = 0;
+  			}
+  		}
+		if (countDay!==0) {
+			countWeek++;
+			chartData['第'+countWeek+'周'] = Math.floor(countSum/countDay);
+		}
+  		break;
+  	case "month":
+  		chartData = {};
+  		let countSums = 0,countDays = 0, countMonth=0;
+  		for(let item in nowCityData){
+  			countSums += nowCityData[item];
+        countDays++;
+  			if (new Date(item).getMonth()!==countMonth) {
+  				countMonth++;
+  				chartData['第'+countMonth+'月'] = Math.floor(countSums/countDays);
+  				countSums = 0;
+  				countDays = 0;
+  			}
+  		}
+      if (countDays!==0) {
+        countMonth++;
+        chartData['第'+countMonth+'月'] = Math.floor(countSums/countDays);
+      }
+  		break;	
+  }	
 
 }
 
@@ -148,7 +186,7 @@ function initAqiChartData() {
  * 初始化函数
  */
 function init() {
-  initGraTimeForm()
+  initGraTimeForm();
   initCitySelector();
   initAqiChartData();
   renderChart();

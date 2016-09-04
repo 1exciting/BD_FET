@@ -27,4 +27,6 @@
         * [x] [dang](http://htmlpreview.github.io/?https://github.com/1exciting/BD_FET/blob/master/stage2/task15/dang/index.html)
     + task16
         * [x] bao
+    + task 17
+        * [x] [bao](http://htmlpreview.github.io/?https://github.com/1exciting/BD_FET/blob/master/stage2/task17/bao/task.html)
     
