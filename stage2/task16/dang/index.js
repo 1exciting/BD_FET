@@ -35,7 +35,7 @@ function addAqiData() {
  * 渲染aqi-table表格
  */
 function renderAqiList() {
-	var strs = "<tr><td>城市</td><td>空气质量</td><td>操作</td></tr>";
+	var strs = '<tr><td>城市</td><td>空气质量</td><td>操作</td></tr>';
 	
 	for(let item in aqiData){
 		strs += `<tr><td>${item}</td><td>${aqiData[item]}</td><td><button data-city="${item}">删除</button></td></tr>`;
