@@ -29,4 +29,7 @@
         * [x] bao
     + task 17
         * [x] [bao](https://1exciting.github.io/BD_FET/stage2/task17/bao/task.html)
+        * [x] [dang](https://1exciting.github.io/BD_FET/stage2/task17/dang/index.html)
+    + task 18
+    * [x] [dang](https://1exciting.github.io/BD_FET/stage2/task18/dang/index.html)
     
