@@ -54,6 +54,11 @@
   }
 
   Queue.prototype.pushLeft = function () {
+    let value = document.getElementById('number').value
+    if (!/\d+/.test(value)) {
+      alert('input invalid!')
+      return
+    }
     let n = parseInt(document.getElementById('number').value)
 
     let figure = document.createElement('figure')
@@ -66,6 +71,11 @@
   }
 
   Queue.prototype.pushRight = function (x) {
+    let value = document.getElementById('number').value
+    if (!x && !/\d+/.test(value)) {
+      alert('input invalid!')
+      return
+    }
     let n = parseInt(document.getElementById('number').value) || x
 
     let figure = document.createElement('figure')
@@ -77,11 +87,19 @@
   }
 
   Queue.prototype.popLeft = function () {
+    if (this.arr.length <= 0) {
+      alert('its empty!')
+      return
+    }
     alert(this.arr.shift())
     this.root.removeChild(this.root.firstElementChild)
   }
 
   Queue.prototype.popRight = function () {
+    if (this.arr.length <= 0) {
+      alert('its empty!')
+      return
+    }
     alert(this.arr.pop())
     this.root.removeChild(this.root.lastElementChild)
   }
