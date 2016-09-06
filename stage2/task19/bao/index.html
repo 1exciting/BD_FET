@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    figure.box {
+      background-color: red;
+      min-width: 10px;
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+      margin: 5px 2px;
+
+    }
+
+    section.q {
+      display: flex;
+      align-items: flex-end;
+      height: 120px;
+
+      /*margin: 20px 20px;*/
+    }
+  </style>
+</head>
+<body>
+<section class="control">
+  <input id="number" type="text"/>
+  <button> 左侧入</button>
+  <button> 右侧入</button>
+  <button> 左侧出</button>
+  <button> 右侧出</button>
+  <button> random20</button>
+  <button> bubble sort</button>
+</section>
+<section class="q" id="queue">
+  <!--<figure class="box">10</figure>-->
+</section>
+<p id="info"></p>
+</body>
+<script>
+  //事件绑定函数，兼容浏览器差异
+  function addEvent(element, event, listener) {
+    if (element.addEventListener) {
+      element.addEventListener(event, listener, false);
+    }
+    else if (element.attachEvent) {
+      element.attachEvent("on" + event, listener);
+    }
+    else {
+      element["on" + event] = listener;
+    }
+  }
+
+  function Queue(initial, root) {
+    this.arr = []
+    this.root = root
+
+    initial = initial || []
+    initial.forEach((x)=>this.pushRight(x))
+  }
+
+  Queue.prototype.pushLeft = function () {
+    let value = document.getElementById('number').value
+    if (!/\d+/.test(value)) {
+      alert('input invalid!')
+      return
+    }
+    let n = parseInt(document.getElementById('number').value)
+    if (n < 10 || n > 100) {
+      alert('input invalid! 10<n<100')
+      return
+    }
+
+    let figure = document.createElement('figure')
+    figure.className = 'box'
+    figure.style.height = n * 1 + 'px'
+//    figure.appendChild(document.createTextNode(n))
+    this.root.firstChild ? this.root.insertBefore(figure, this.root.firstChild) : this.root.appendChild(figure)
+    this.arr.unshift(n)
+
+  }
+
+  Queue.prototype.pushRight = function (x) {
+    let value = document.getElementById('number').value
+    if (!x && !/\d+/.test(value)) {
+      alert('input invalid!')
+      return
+    }
+    let n = parseInt(document.getElementById('number').value) || x
+    if (n < 10 || n > 100) {
+      alert('input invalid! 10<n<100')
+      return
+    }
+    let figure = document.createElement('figure')
+    figure.className = 'box'
+    figure.style.height = n * 1 + 'px'
+//    figure.appendChild(document.createTextNode(n))
+
+    this.root.appendChild(figure)
+    this.arr.push(n)
+  }
+
+  //  Queue.prototype.addInDom = function () {
+  //
+  //  }
+
+  Queue.prototype.popLeft = function () {
+    if (this.arr.length <= 0) {
+      alert('its empty!')
+      return
+    }
+    alert(this.arr.shift())
+    this.root.removeChild(this.root.firstElementChild)
+  }
+
+  Queue.prototype.popRight = function () {
+    if (this.arr.length <= 0) {
+      alert('its empty!')
+      return
+    }
+    alert(this.arr.pop())
+    this.root.removeChild(this.root.lastElementChild)
+  }
+
+  Queue.prototype.random = function () {
+    this.empty()
+    let count = 20
+    while (count) {
+      let item = Math.floor(Math.random() * 90 + 10)
+      this.pushRight(item)
+      count--
+    }
+
+  }
+
+  Queue.prototype.empty = function () {
+    document.getElementById('number').value = ''
+    while (this.root.firstChild) {
+      this.root.removeChild(this.root.firstChild)
+    }
+    this.arr = []
+  }
+
+  Queue.prototype.swapArr = function (idxA, idxB) {
+    //data
+    let tmp = this.arr[idxA]
+    this.arr[idxA] = this.arr[idxB]
+    this.arr[idxB] = tmp
+  }
+
+  Queue.prototype.swapDom = function (idxA, idxB) {
+    //dom
+
+    let tmp = this.root.children[idxA].style.height
+    this.root.children[idxA].style.height = this.root.children[idxB].style.height
+    this.root.children[idxB].style.height = tmp
+
+    this.root.children[idxB].style.backgroundColor = 'blue'
+    this.root.children[idxA].style.backgroundColor = 'red'
+
+    console.log(`swap ${idxA} and ${idxB}`)
+    document.getElementById('info').innerHTML += `<br>swap ${idxA} and ${idxB} `
+  }
+
+  Queue.prototype.bubbleSort = function () {
+    let i = 0,
+        j,
+        delayQueue = []
+
+    for (i = 0; i < this.arr.length; i++) {
+      for (j = 1; j < this.arr.length - i; j++) {
+
+
+        if (this.arr[j - 1] > this.arr[j]) {
+//            this.swap(j - 1, j)
+          this.swapArr(j - 1, j)
+
+
+          ;
+          (function (j, self) {
+            delayQueue.push(self.swapDom.bind(self, j - 1, j))
+          })(j, this)
+        }
+
+      }
+    }
+
+    //add info in dom
+    let info = document.getElementById('info')
+    info.innerText = `Bubble Sort, Total swap is ${delayQueue.length} time`
+
+    // replay dom swap
+    ;
+    (function delay() {
+      if (delayQueue.length > 0) {
+        delayQueue.shift()()
+        setTimeout(delay, 50)
+      }
+    })()
+
+  }
+
+  const root = document.getElementById('queue')
+
+  let q = new Queue([], root)
+  q.random()
+
+  const buttons = document.getElementsByTagName('button')
+  addEvent(buttons[0], 'click', Queue.prototype.pushLeft.bind(q))
+  addEvent(buttons[1], 'click', Queue.prototype.pushRight.bind(q))
+  addEvent(buttons[2], 'click', Queue.prototype.popLeft.bind(q))
+  addEvent(buttons[3], 'click', Queue.prototype.popRight.bind(q))
+  addEvent(buttons[4], 'click', Queue.prototype.random.bind(q))
+  addEvent(buttons[5], 'click', Queue.prototype.bubbleSort.bind(q))
+
+  addEvent(root, 'click', function (e) {
+    if (e.target && e.target.nodeName.toLowerCase() === 'figure') {
+//      [].forEach.app childNodes
+//      e.target
+//      root.childElementCount
+      let removeIdx = -1
+      let offsetLeft = e.x - e.offsetX
+          ;
+
+      for (let i = 0; i < root.childNodes.length; i++) {
+        let node = root.childNodes[i]
+        if (node.nodeType === 1) {
+          removeIdx++
+
+          if (node.offsetLeft === offsetLeft) {
+            q.arr.splice(removeIdx, 1)
+            root.removeChild(e.target)
+            break
+          }
+        }
+      }
+    }
+  })
+</script>
+</html>
