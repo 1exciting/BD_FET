@@ -22,7 +22,7 @@ addEventHandler(inputs[1],'click',function(){
 	if((/^[1-9][0-9]*$/).test(value)){
 		if (parseInt(value)>=10&&parseInt(value)<=100) {
 			var newNode = document.createElement('a');
-			newNode.setAttribute("style","height:"+value+"px");
+			newNode.setAttribute("style","height:"+2*value+"px");
 			if (contents.children.length===0) {
 				contents.appendChild(newNode);
 			}else{
@@ -49,7 +49,7 @@ addEventHandler(inputs[2],'click',function(){
 	}
 	if((/^[1-9][0-9]*$/).test(value)){
 		var newNode = document.createElement('a');
-		newNode.setAttribute("style","height:"+value+"px");
+		newNode.setAttribute("style","height:"+2*value+"px");
 		contents.appendChild(newNode);
 	}else{
 		alert("input is invalid!")
@@ -92,7 +92,7 @@ addEventHandler(inputs[5],'click',function(){
 	var str = '';
 	for (let i = 0; i <= n; i++) {
 		var number = Math.floor(Math.random()*81+10);
-		str +=`<a style="height:${number}px"></a>`;
+		str +=`<a style="height:${2*number}px"></a>`;
 	}
 	contents.innerHTML = str;
 	for(let j=0;j< contents.children.length;j++){
@@ -101,15 +101,18 @@ addEventHandler(inputs[5],'click',function(){
 });
 
 //排序
-addEventHandler(inputs[6],'click',function(){
+addEventHandler(inputs[6],'click',bubbleSort.bind(this,contents));
+
+//冒泡
+function bubbleSort(contents){
 	var alists = contents.children,
 		len = alists.length,j=1, timer;
 	var i = len,
 	 	flag = false;
 	timer = setInterval(function() {
-		for(let k = 0; k< len;k++){
+		/*for(let k = 0; k< len;k++){
 			alists[k].style.backgroundColor = "red";
-		};
+		};*/
         if(i <= 1) {
             clearInterval(timer);
         }
@@ -125,7 +128,7 @@ addEventHandler(inputs[6],'click',function(){
             var temp = alists[j-1].offsetHeight;
 			alists[j-1].offsetHeight = alists[j].offsetHeight;
 			alists[j-1].style.height = alists[j].offsetHeight+"px";
-			alists[j-1].style.backgroundColor = "blue";
+			alists[j-1].style.backgroundColor = "red";
 			alists[j].offsetHeight = temp;
 			alists[j].style.height = temp+"px";
 			alists[j].style.backgroundColor = "blue";
@@ -134,6 +137,6 @@ addEventHandler(inputs[6],'click',function(){
 		j++;
 
 	},50);
-});
+}
 
 
