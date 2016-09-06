@@ -166,7 +166,7 @@
   Queue.prototype.bubbleSort = function () {
     let i = 0,
         j,
-        delayQueue = []
+        replayQueue = []
 
     for (i = 0; i < this.arr.length; i++) {
       for (j = 1; j < this.arr.length - i; j++) {
@@ -179,7 +179,7 @@
 
           ;
           (function (j, self) {
-            delayQueue.push(self.swapDom.bind(self, j - 1, j))
+            replayQueue.push(self.swapDom.bind(self, j - 1, j))
           })(j, this)
         }
 
@@ -188,13 +188,13 @@
 
     //add info in dom
     let info = document.getElementById('info')
-    info.innerText = `Bubble Sort, Total swap is ${delayQueue.length} time`
+    info.innerText = `Bubble Sort, Total swap is ${replayQueue.length} time`
 
     // replay dom swap
     ;
     (function delay() {
-      if (delayQueue.length > 0) {
-        delayQueue.shift()()
+      if (replayQueue.length > 0) {
+        replayQueue.shift()()
         setTimeout(delay, 50)
       }
     })()
