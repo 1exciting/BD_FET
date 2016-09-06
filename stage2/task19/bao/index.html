@@ -31,13 +31,14 @@
   <button> 右侧入</button>
   <button> 左侧出</button>
   <button> 右侧出</button>
-  <button> random60</button>
-  <button> bubble sort</button>
-  <button> insert sort</button>
-  <button> quick sort</button>
-  <button> select sort</button>
-  <button> heap sort</button>
-  <button> shell sort</button>
+  <button><b>随机产生60个数(10-100)</b></button>
+  <button> 冒泡排序</button>
+  <button> 插入排序</button>
+  <button> 快排</button>
+  <button> 选择排序</button>
+  <button> 堆排序</button>
+  <button> 希尔排序</button>
+  <button> 归并排序</button>
 </section>
 <section class="q" id="queue">
   <!--<figure class="box">10</figure>-->
@@ -77,6 +78,7 @@
   addEvent(buttons[8], 'click', Queue.prototype.selectSort.bind(q))
   addEvent(buttons[9], 'click', Queue.prototype.heapSort.bind(q))
   addEvent(buttons[10], 'click', Queue.prototype.shellSort.bind(q))
+  addEvent(buttons[11], 'click', Queue.prototype.mergeSort.bind(q))
 
   addEvent(root, 'click', function (e) {
     if (e.target && e.target.nodeName.toLowerCase() === 'figure') {

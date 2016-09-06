@@ -367,3 +367,53 @@ Queue.prototype.shellSort = function () {
 	this.replay('Shell Sort')
 
 }
+
+Queue.prototype.mergeSort = function () {
+	function merge(start, mid, end) {
+		let i = start,
+			j = mid,
+			m = mid + 1,
+			n = end,
+			tmp = [],
+			k = 0
+
+		while (i <= j && m <= n) {
+			if (this.arr[i] <= this.arr[m]) {
+				tmp[k++] = this.arr[i++]
+			} else {
+				tmp[k++] = this.arr[m++]
+			}
+		}
+		while (i <= j) {
+			tmp[k++] = this.arr[i++]
+		}
+		while (m <= n) {
+			tmp[k++] = this.arr[m++]
+		}
+
+		tmp.forEach((x, idx)=> {
+			this.arr[start + idx] = x
+
+			;
+			(function (i, val, self) {
+				self.addReplay(self.setDom.bind(self, i, val))
+			})(start + idx, x, this)
+		})
+	}
+
+	function sort(start, end) {
+		if (start < end) {
+			console.log(`${start}-${end}`)
+			let mid = Math.floor((start + end) / 2)
+
+			sort.call(this, start, mid)
+			sort.call(this, mid + 1, end)
+			merge.call(this, start, mid, end)
+		}
+	}
+
+
+	sort.call(this, 0, this.arr.length - 1)
+
+	this.replay('Merge Sort')
+}
