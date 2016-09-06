@@ -2,11 +2,11 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Task 18</title>
+    <title>Task 19</title>
     <style type="text/css">
       #contain{
         margin-top:10px;
-        height: 100px;
+        height: 200px;
         display: flex;
         align-items: flex-end;
       }
@@ -24,16 +24,34 @@
       .green{
         background: green;
       }
+      .zi{
+        background: #f136f4;
+      }
+      .line{
+        margin-top: 2px;
+      }
+      input{
+        margin: 3px 1px;
+      }
     </style>
   </head>
 <body>
-  <input type="text">
-  <input type="button" value="左侧入">
-  <input type="button" value="右侧入">
-  <input type="button" value="左侧出">
-  <input type="button" value="右侧出">
-  <input type="button" value="排序">
-  <input type="button" value="随机添加20个">
+  <div>
+    <input type="text">
+    <input type="button" value="左侧入">
+    <input type="button" value="右侧入">
+    <input type="button" value="左侧出">
+    <input type="button" value="右侧出">
+  </div>
+  <div class="line">
+    <input type="button" value="随机添加40个">
+    <label>排序间隔<input type="text" value="100"></label>
+  </div>
+  <div class="line">
+    <input type="button" value="冒泡排序">
+    <input type="button" value="插入排序">
+    <input type="button" value="选择排序">
+  </div>
   <div id="contain">
   </div>
   <script src="do.js"></script>

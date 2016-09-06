@@ -17,6 +17,7 @@ var button=document.getElementsByTagName("input");
 //定义队列
 var queue={
 	list:[],
+	isSort:false,
 	leftin:function(num){
 		if(this.list.length>=60){
 			alert('input number bigger than 60!');
@@ -40,7 +41,7 @@ var queue={
 		if(this.isEmpty())
 			alert("队列为空!")
 		else{
-			alert(this.list.shift());
+			this.list.shift();
 			this.reload();
 		}
 	},
@@ -48,14 +49,14 @@ var queue={
 		if(this.isEmpty())
 			alert("队列为空!")
 		else{
-			alert(this.list.pop());
+			this.list.pop();
 			this.reload();
 		}
 	},
 	reload:function(){
 		var html="";
 		for(var i=0;i<this.list.length;i++){
-			html+='<div class="item '+this.list[i][1]+'" style="height:'+this.list[i][0]+'px"></div>';
+			html+='<div class="item '+this.list[i][1]+'" style="height:'+this.list[i][0]*2+'px"></div>';
 		}
 		contain.innerHTML=html;
 		addDivEvent();
@@ -66,13 +67,25 @@ var queue={
 		this.reload();
 	},
 	sort:function(){
+		if(this.isSort==true)
+			return;
 		// timeout
-		var time=300;
+		var time;
+		var input=button[6].value;
+		if((/^[1-9][0-9]*$/).test(input)){
+				time=parseInt(input);
+			}else{
+				alert("input is invalid！");
+				time=100;
+				button[7].value=100;
+				return;
+			}
 		var temp;
 		//冒泡排序
 		var i=1;//共length-1个循环
 		var j=0;
 		var flag=false;
+		this.isSort=true;
 		var timer=setInterval(function(){
 			if(j!=0){
 				queue.list[j-1][1]="red";
@@ -84,12 +97,14 @@ var queue={
 				j=0;
 				if(flag==false){
 					clearInterval(timer);
+					this.isSort=false;
 					return;
 				}
 				flag=false;
 			}
 			if(i>=queue.list.length){
 				clearInterval(timer);
+				this.isSort=false;
 				return;
 			}
 			queue.list[j][1]=queue.list[j+1][1]="blue";
@@ -104,9 +119,117 @@ var queue={
 			j++;
 		},time)
 	},
+	insertSort:function(){
+		if(this.isSort==true)
+			return;
+		this.isSort=true;
+		// timeout
+		var time;
+		var input=button[6].value;
+		if((/^[1-9][0-9]*$/).test(input)){
+				time=parseInt(input);
+			}else{
+				alert("input is invalid！");
+				time=100;
+				button[6].value=100;
+				return;
+			}
+		//插入排序
+		var i=1;//共length-1个循环
+		var j=i;
+		var insertFlag=false;
+		if(queue.list.length<=1){
+			this.isSort=false;
+			return;
+		}
+		var temp=queue.list[1];
+		queue.list[0][1]='blue';
+		var timer=setInterval(function(){
+			if(insertFlag==false){
+				queue.list[j][1]='blue';
+			}
+			if(insertFlag==true||j==0){
+				queue.list[j]=temp;
+				queue.reload();
+				i++;
+				j=i;
+				temp=queue.list[i];
+				insertFlag=false;
+			}
+			if(i>=queue.list.length){
+				clearInterval(timer);
+				this.isSort=false;
+				return;
+			}else{
+				queue.list[i][1]='blue';
+			}
+			if(queue.list[j-1][0]>temp[0]&&j>0){
+				queue.list[j]=queue.list[j-1];
+				queue.list[j-1][1]='green';
+				queue.reload();
+				j--;
+			}
+			else{
+				queue.list[j]=temp;
+				insertFlag=true;
+				queue.reload();
+			}
+		},time)
+	},
+	selectSort:function(){
+		if(this.isSort==true)
+			return;
+		this.isSort=true;
+		// timeout
+		var time;
+		var input=button[6].value;
+		if((/^[1-9][0-9]*$/).test(input)){
+				time=parseInt(input);
+			}else{
+				alert("input is invalid！");
+				time=100;
+				button[6].value=100;
+				return;
+			}
+		//插入排序
+		var i=0;//共length-1个循环
+		var j=0;
+		var max=queue.list[0][0];
+		var index=0;
+		queue.list[index][1]='blue';
+		var temp;
+		var timer=setInterval(function(){
+			queue.list[j][1]='red';
+			j++;
+			if(i>=queue.list.length-1){
+				clearInterval(timer);
+				return;
+			}
+			queue.list[j][1]='blue';
+			if(max<queue.list[j][0]){
+				max=queue.list[j][0];
+				queue.list[index][1]='red';
+				index=j;
+			}
+			
+			queue.list[index][1]='green';
+			queue.reload();
+			if(j>=queue.list.length-i-1){
+				queue.list[index]=queue.list[j];
+				queue.list[index][1]='red';
+				queue.list[j]=[max,'green'];
+				queue.reload();
+				i++;
+				j=0;
+				index=0;
+				max=queue.list[0][0];
+			}
+
+		},time);
+	},
 	random:function(){
-		var i=this.list.length;
-		for(;i<=20;i++){
+		this.list=[];
+		for(var i=0;i<40;i++){
 			this.list.unshift([parseInt(randomData()),'red']);
 		}
 		this.reload();
@@ -151,9 +274,15 @@ addEvent(button[3],'click',function(){
 addEvent(button[4],'click',function(){
 	queue.rightpop();
 });
-addEvent(button[5],'click',function(){
+addEvent(button[7],'click',function(){
 	queue.sort();
 });
-addEvent(button[6],'click',function(){
+addEvent(button[5],'click',function(){
 	queue.random();
+});
+addEvent(button[8],'click',function(){
+	queue.insertSort();
+});
+addEvent(button[9],'click',function(){
+	queue.selectSort();
 });
