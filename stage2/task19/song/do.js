@@ -75,7 +75,8 @@ var queue={
 		var flag=false;
 		var timer=setInterval(function(){
 			if(j!=0){
-				queue.list[j-1][1]=queue.list[j][1]="red";
+				queue.list[j-1][1]="red";
+				queue.list[j][1]="green";
 				queue.reload();
 			}
 			if(j>=queue.list.length-i){
