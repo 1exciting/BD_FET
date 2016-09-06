@@ -97,6 +97,8 @@ Queue.prototype.swapArr = function (idxA, idxB) {
 	this.arr[idxB] = tmp
 
 	console.log(`swap ${idxA} and ${idxB}`)
+
+	this.replayQueue.push(this.swapDom.bind(this, idxA, idxB))
 }
 
 //交换数组对应的 DOM
@@ -154,7 +156,7 @@ Queue.prototype.replay = function (msg) {
 	function delay() {
 		if (this.replayQueue.length > 0) {
 			this.replayQueue.shift()()
-			setTimeout(delay.bind(this), 50)
+			setTimeout(delay.bind(this), 20)
 		}
 	}
 
@@ -165,8 +167,8 @@ Queue.prototype.replay = function (msg) {
 
 Queue.prototype.bubbleSort = function () {
 	let i,
-		j,
-		replayQueue = []
+		j
+	// replayQueue = []
 
 	for (i = 0; i < this.arr.length; i++) {
 		for (j = 1; j < this.arr.length - i; j++) {
@@ -177,27 +179,28 @@ Queue.prototype.bubbleSort = function () {
 				this.swapArr(j - 1, j)
 
 
-				;
-				(function (j, self) {
-					replayQueue.push(self.swapDom.bind(self, j - 1, j))
-				})(j, this)
+				// ;
+				// (function (j, self) {
+				// 	replayQueue.push(self.swapDom.bind(self, j - 1, j))
+				// })(j, this)
 			}
 
 		}
 	}
 
-	//add info in dom
-	let info = document.getElementById('info')
-	info.innerText = `Bubble Sort, Total swap is ${replayQueue.length} time`
-
-	// replay dom swap
-	;
-	(function delay() {
-		if (replayQueue.length > 0) {
-			replayQueue.shift()()
-			setTimeout(delay, 50)
-		}
-	})()
+	this.replay('Bubble Sort')
+	// //add info in dom
+	// let info = document.getElementById('info')
+	// info.innerText = `Bubble Sort, Total swap is ${replayQueue.length} time`
+	//
+	// // replay dom swap
+	// ;
+	// (function delay() {
+	// 	if (replayQueue.length > 0) {
+	// 		replayQueue.shift()()
+	// 		setTimeout(delay, 50)
+	// 	}
+	// })()
 
 }
 
@@ -285,5 +288,27 @@ Queue.prototype.quickSort = function () {
 
 	sort.call(this, 0, this.arr.length - 1)
 
-	this.replay('quick sort')
+	this.replay('Quick Sort')
+}
+
+Queue.prototype.selectSort = function () {
+	let i,
+		j
+	for (i = 0; i < this.arr.length; i++) {
+		let max = i
+		for (j = i + 1; j < this.arr.length; j++) {
+			if (this.arr[j] < this.arr[max]) {
+				max = j
+			}
+
+		}
+		this.swapArr(max, i)
+	}
+
+	this.replay('Select Sort')
+
+}
+
+Queue.prototype.heapSort = function () {
+
 }
