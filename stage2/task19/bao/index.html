@@ -31,9 +31,10 @@
   <button> 右侧入</button>
   <button> 左侧出</button>
   <button> 右侧出</button>
-  <button> random20</button>
+  <button> random60</button>
   <button> bubble sort</button>
   <button> insert sort</button>
+  <button> quick sort</button>
 </section>
 <section class="q" id="queue">
   <!--<figure class="box">10</figure>-->
@@ -59,16 +60,17 @@
   const root = document.getElementById('queue')
 
   let q = new Queue([], root)
-  q.random()
+  q.random(60)
 
   const buttons = document.getElementsByTagName('button')
   addEvent(buttons[0], 'click', Queue.prototype.pushLeft.bind(q))
   addEvent(buttons[1], 'click', Queue.prototype.pushRight.bind(q))
   addEvent(buttons[2], 'click', Queue.prototype.popLeft.bind(q))
   addEvent(buttons[3], 'click', Queue.prototype.popRight.bind(q))
-  addEvent(buttons[4], 'click', Queue.prototype.random.bind(q))
+  addEvent(buttons[4], 'click', Queue.prototype.random.bind(q, 60))
   addEvent(buttons[5], 'click', Queue.prototype.bubbleSort.bind(q))
   addEvent(buttons[6], 'click', Queue.prototype.insertSort.bind(q))
+  addEvent(buttons[7], 'click', Queue.prototype.quickSort.bind(q))
 
   addEvent(root, 'click', function (e) {
     if (e.target && e.target.nodeName.toLowerCase() === 'figure') {

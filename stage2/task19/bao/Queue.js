@@ -70,9 +70,9 @@ Queue.prototype.popRight = function () {
 	this.root.removeChild(this.root.lastElementChild)
 }
 
-Queue.prototype.random = function () {
+Queue.prototype.random = function (c) {
 	this.empty()
-	let count = 20
+	let count = c || 20
 	while (count) {
 		let item = Math.floor(Math.random() * 90 + 10)
 		this.pushRight(item)
@@ -223,9 +223,6 @@ Queue.prototype.insertSort = function () {
 		(function (j, target, self) {
 			self.addReplay(self.setDom.bind(self, j, target))
 		})(j, target, this)
-
-//      this.addReplay(this.copyDom.bind(this, i, j))
-
 	}
 
 	this.replay('Insert Sort')
@@ -234,4 +231,59 @@ Queue.prototype.insertSort = function () {
 
 Queue.prototype.quickSort = function () {
 
+	function sort(l, r) {
+		console.log(`${l} - ${r}`)
+		if (l < r) {
+			// let mid = Math.floor((l + r) / 2)
+
+			//第一个数当中间值
+			let i = l,
+				j = r,
+				pivot = this.arr[l]
+
+			while (i < j) {
+				while (i < j && this.arr[j] >= pivot) {
+					j--
+				}
+				if (i < j) {
+					this.arr[i] = this.arr[j]
+
+					;
+					(function (i, j, self) {
+						self.addReplay(self.copyDom.bind(self, j, i))
+					})(i, j, this)
+
+					i++
+				}
+
+				while (i < j && this.arr[i] < pivot) {
+					i++
+				}
+				if (i < j) {
+					this.arr[j] = this.arr[i]
+
+					;
+					(function (i, j, self) {
+						self.addReplay(self.copyDom.bind(self, i, j))
+					})(i, j, this)
+
+					j--
+				}
+			}
+
+			this.arr[i] = pivot
+
+			;
+			(function (i, pivot, self) {
+				self.addReplay(self.setDom.bind(self, i, pivot))
+			})(i, pivot, this)
+
+			sort.call(this, l, i - 1)
+			sort.call(this, i + 1, r)
+		}
+	}
+
+	sort.call(this, 0, this.arr.length - 1)
+
+	this.replay('quick sort')
 }
