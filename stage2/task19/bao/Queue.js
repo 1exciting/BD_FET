@@ -331,3 +331,39 @@ Queue.prototype.heapSort = function () {
 
 	this.replay('Heap Sort')
 }
+
+Queue.prototype.shellSort = function () {
+	let i,
+		j,
+		gap
+
+	for (gap = Math.floor(this.arr.length / 2); gap > 0; gap = Math.floor(gap / 2)) {
+		for (i = 0; i < gap; i++) {
+			for (j = i + gap; j < this.arr.length; j += gap)
+				if (this.arr[j] < this.arr[j - gap]) {
+					let temp = this.arr[j];
+					let k = j - gap;
+					while (k >= 0 && this.arr[k] > temp) {
+						this.arr[k + gap] = this.arr[k]
+
+						;
+						(function (from, to, self) {
+							self.addReplay(self.copyDom.bind(self, from, to))
+						})(k, k + gap, this)
+
+						k -= gap
+					}
+					this.arr[k + gap] = temp
+
+					;
+					(function (i, temp, self) {
+						self.addReplay(self.setDom.bind(self, i, temp))
+					})(k + gap, temp, this)
+
+				}
+		}
+	}
+
+	this.replay('Shell Sort')
+
+}
