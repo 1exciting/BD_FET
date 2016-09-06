@@ -89,6 +89,7 @@ Queue.prototype.empty = function () {
 	this.arr = []
 }
 
+// 交换数组中的数据
 Queue.prototype.swapArr = function (idxA, idxB) {
 	//data
 	let tmp = this.arr[idxA]
@@ -98,6 +99,7 @@ Queue.prototype.swapArr = function (idxA, idxB) {
 	console.log(`swap ${idxA} and ${idxB}`)
 }
 
+//交换数组对应的 DOM
 Queue.prototype.swapDom = function (idxA, idxB) {
 	//dom
 
@@ -112,6 +114,11 @@ Queue.prototype.swapDom = function (idxA, idxB) {
 	document.getElementById('info').innerHTML += `<br>swap ${idxA} and ${idxB} `
 }
 
+/*
+ 将 from 的 DOM的高度赋值给 to DOM
+ @from dom 的 index
+ @to dom的 index
+ */
 Queue.prototype.copyDom = function (from, to) {
 	this.root.children[to].style.height = this.root.children[from].style.height
 
@@ -121,6 +128,8 @@ Queue.prototype.copyDom = function (from, to) {
 
 }
 
+//设置 DOM 的高度
+// @idx 是 DOM 的 index
 Queue.prototype.setDom = function (idx, value) {
 	this.root.children[idx].style.height = value * 2 + 'px'
 	this.root.children[idx].style.backgroundColor = 'blue'
@@ -128,11 +137,13 @@ Queue.prototype.setDom = function (idx, value) {
 	document.getElementById('info').innerHTML += `<br>set ${idx} = ${value} `
 }
 
+// 将 fn 添加到 replay queue
 Queue.prototype.addReplay = function (fn) {
 	this.replayQueue.push(fn)
 //    this.replayQueue.push(this.swapDom.bind(this, i, j))
 }
 
+//@msg 排序的名称
 Queue.prototype.replay = function (msg) {
 	//add info in dom
 	let info = document.getElementById('info')
