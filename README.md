@@ -23,9 +23,11 @@
     + task13
         * [x] bao
         * [x] [song](https://1exciting.github.io/BD_FET/stage2/task13/song/index.html)
+        * [x] [dang](https://1exciting.github.io/BD_FET/stage2/task13/dang/index.html)
     + task14
         * [x] bao
         * [x] [song](https://1exciting.github.io/BD_FET/stage2/task14/song/index.html)
+        * [x] [dang](https://1exciting.github.io/BD_FET/stage2/task14/dang/index.html)
     + task15
         * [x] bao
         * [x] [dang](http://htmlpreview.github.io/?https://github.com/1exciting/BD_FET/blob/master/stage2/task15/dang/index.html)
@@ -33,6 +35,7 @@
     + task16
         * [x] bao
         * [x] [song](https://1exciting.github.io/BD_FET/stage2/task16/song/index.html)
+        * [x] [dang](https://1exciting.github.io/BD_FET/stage2/task16/dang/index.html)
     + task 17
         * [x] [bao](https://1exciting.github.io/BD_FET/stage2/task17/bao/task.html)
         * [x] [dang](https://1exciting.github.io/BD_FET/stage2/task17/dang/index.html)
@@ -42,5 +45,6 @@
         * [x] [song](https://1exciting.github.io/BD_FET/stage2/task18/song/index.html)
     + task 19
         * [x] [song](https://1exciting.github.io/BD_FET/stage2/task19/song/index.html)
+        * [x] [dang](https://1exciting.github.io/BD_FET/stage2/task19/dang/index.html)
         * [x] [bao](https://1exciting.github.io/BD_FET/stage2/task19/bao/index.html)
     
