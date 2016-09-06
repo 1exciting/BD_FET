@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Title</title>
+  <title> 排序算法可视化</title>
   <style>
     figure.box {
       background-color: red;
@@ -35,6 +35,7 @@
   <button> bubble sort</button>
   <button> insert sort</button>
   <button> quick sort</button>
+  <button> select sort</button>
 </section>
 <section class="q" id="queue">
   <!--<figure class="box">10</figure>-->
@@ -71,6 +72,7 @@
   addEvent(buttons[5], 'click', Queue.prototype.bubbleSort.bind(q))
   addEvent(buttons[6], 'click', Queue.prototype.insertSort.bind(q))
   addEvent(buttons[7], 'click', Queue.prototype.quickSort.bind(q))
+  addEvent(buttons[8], 'click', Queue.prototype.selectSort.bind(q))
 
   addEvent(root, 'click', function (e) {
     if (e.target && e.target.nodeName.toLowerCase() === 'figure') {
