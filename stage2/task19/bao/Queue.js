@@ -102,18 +102,23 @@ Queue.prototype.swapArr = function (idxA, idxB) {
 }
 
 //交换数组对应的 DOM
+// 如果 idxA 和 idxB 相同 , 只会把他颜色变为蓝色
 Queue.prototype.swapDom = function (idxA, idxB) {
-	//dom
+	if (idxA === idxB) {
+		this.root.children[idxB].style.backgroundColor = 'blue'
+		return
+	}
 
 	let tmp = this.root.children[idxA].style.height
 	this.root.children[idxA].style.height = this.root.children[idxB].style.height
 	this.root.children[idxB].style.height = tmp
 
-	this.root.children[idxB].style.backgroundColor = 'blue'
 	this.root.children[idxA].style.backgroundColor = 'red'
-
+	this.root.children[idxB].style.backgroundColor = 'blue'
 
 	document.getElementById('info').innerHTML += `<br>swap ${idxA} and ${idxB} `
+
+	return idxA
 }
 
 /*
@@ -154,10 +159,15 @@ Queue.prototype.replay = function (msg) {
 	// replay dom swap
 
 	function delay() {
-		if (this.replayQueue.length > 0) {
+		if (this.replayQueue.length > 1) {
 			this.replayQueue.shift()()
-			setTimeout(delay.bind(this), 20)
+		} else if (this.replayQueue.length === 1) {
+			let idx = this.replayQueue.shift()()
+			idx ? this.swapDom(idx, idx) : null
+		} else {
+			return
 		}
+		setTimeout(delay.bind(this), 20)
 	}
 
 	delay.call(this)
@@ -168,40 +178,16 @@ Queue.prototype.replay = function (msg) {
 Queue.prototype.bubbleSort = function () {
 	let i,
 		j
-	// replayQueue = []
 
 	for (i = 0; i < this.arr.length; i++) {
 		for (j = 1; j < this.arr.length - i; j++) {
-
-
 			if (this.arr[j - 1] > this.arr[j]) {
-//            this.swap(j - 1, j)
 				this.swapArr(j - 1, j)
-
-
-				// ;
-				// (function (j, self) {
-				// 	replayQueue.push(self.swapDom.bind(self, j - 1, j))
-				// })(j, this)
 			}
-
 		}
 	}
 
 	this.replay('Bubble Sort')
-	// //add info in dom
-	// let info = document.getElementById('info')
-	// info.innerText = `Bubble Sort, Total swap is ${replayQueue.length} time`
-	//
-	// // replay dom swap
-	// ;
-	// (function delay() {
-	// 	if (replayQueue.length > 0) {
-	// 		replayQueue.shift()()
-	// 		setTimeout(delay, 50)
-	// 	}
-	// })()
-
 }
 
 Queue.prototype.insertSort = function () {
@@ -311,4 +297,37 @@ Queue.prototype.selectSort = function () {
 
 Queue.prototype.heapSort = function () {
 
+	function heapify(start, end) {
+		let lChild = start * 2 + 1,
+			rChild = lChild + 1,
+			largest = start
+
+		if (lChild < end && this.arr[largest] < this.arr[lChild]) {
+			largest = lChild
+		}
+		if (rChild < end && this.arr[largest] < this.arr[rChild]) {
+			largest = rChild
+		}
+		if (largest != start) {
+			this.swapArr(largest, start)
+			heapify.call(this, largest, end)
+		}
+	}
+
+	function buildHeap() {
+		// console.log([...this.arr.keys()]);
+		[...this.arr.keys()].slice(0, Math.floor(this.arr.length / 2)).reverse().forEach(x=> {
+			// console.log(x)
+			heapify.call(this, x, this.arr.length)
+		})
+	}
+
+	buildHeap.call(this)
+
+	for (let i = this.arr.length - 1; i > 0; i--) {
+		this.swapArr(0, i)
+		heapify.call(this, 0, i)
+	}
+
+	this.replay('Heap Sort')
 }

@@ -36,6 +36,7 @@
   <button> insert sort</button>
   <button> quick sort</button>
   <button> select sort</button>
+  <button> heap sort</button>
 </section>
 <section class="q" id="queue">
   <!--<figure class="box">10</figure>-->
@@ -73,6 +74,7 @@
   addEvent(buttons[6], 'click', Queue.prototype.insertSort.bind(q))
   addEvent(buttons[7], 'click', Queue.prototype.quickSort.bind(q))
   addEvent(buttons[8], 'click', Queue.prototype.selectSort.bind(q))
+  addEvent(buttons[9], 'click', Queue.prototype.heapSort.bind(q))
 
   addEvent(root, 'click', function (e) {
     if (e.target && e.target.nodeName.toLowerCase() === 'figure') {
