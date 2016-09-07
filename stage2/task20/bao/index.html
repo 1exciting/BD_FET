@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    figure.box {
+      /*background-color: red;*/
+      min-width: 30px;
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+      margin: 10px 10px;
+    }
+
+    section.q {
+      display: flex;
+      /*margin: 20px 20px;*/
+    }
+  </style>
+</head>
+<body>
+<section class="control">
+  <textarea id="number"></textarea>
+  <button> 左侧入</button>
+  <button> 右侧入</button>
+  <button> 左侧出</button>
+  <button> 右侧出</button>
+  <button> getTags</button>
+  <input id="search" type="text" placeholder="输入查询 tag">
+</section>
+<section class="q" id="queue">
+  <!--<figure class="box">10</figure>-->
+</section>
+</body>
+<script>
+  //事件绑定函数，兼容浏览器差异
+  function addEvent(element, event, listener) {
+    if (element.addEventListener) {
+      element.addEventListener(event, listener, false);
+    }
+    else if (element.attachEvent) {
+      element.attachEvent("on" + event, listener);
+    }
+    else {
+      element["on" + event] = listener;
+    }
+  }
+
+  function Queue(initial, root) {
+    this.arr = []
+    this.root = root
+
+    initial = initial || []
+    initial.forEach((x)=>this.pushRight(x))
+  }
+
+  Queue.prototype.pushLeft = function () {
+    let value = document.getElementById('number').value
+    if (!/\d+/.test(value)) {
+      alert('input invalid!')
+      return
+    }
+    let n = parseInt(document.getElementById('number').value)
+
+    let figure = document.createElement('figure')
+    figure.className = 'box'
+    figure.appendChild(document.createTextNode(n))
+//    this.root.childNodes = [].unshift.call(this.root.childNodes, figure)
+    this.root.firstChild ? this.root.insertBefore(figure, this.root.firstChild) : this.root.appendChild(figure)
+    this.arr.unshift(n)
+
+  }
+
+  Queue.prototype.pushRight = function (x) {
+    let value = document.getElementById('number').value
+    if (!x && !/\d+/.test(value)) {
+      alert('input invalid!')
+      return
+    }
+    let n = parseInt(document.getElementById('number').value) || x
+
+    let figure = document.createElement('figure')
+    figure.className = 'box'
+    figure.appendChild(document.createTextNode(n))
+
+    this.root.appendChild(figure)
+    this.arr.push(n)
+  }
+
+  Queue.prototype.getTags = function () {
+    this.arr = []
+    this.root.innerHTML = ''
+
+
+    let value = document.getElementById('number').value
+    let child = ''
+    value.split(/[\W]+/).forEach(x=> {
+      if (!x || /\s/.test(x)) {
+        return
+      }
+      child += `<figure class="box">${x}</figure>`
+      this.arr.push(x)
+    })
+    this.root.innerHTML = child
+  }
+
+  Queue.prototype.findTags = function (newChar, backspace = false) {
+    let s = document.getElementById('search').value
+    if (!backspace) {
+      s += newChar
+    } else {
+      s = s.slice(0, -1)
+    }
+    const children = this.root.children
+    this.arr.forEach((x, idx)=> {
+      let start = x.indexOf(s)
+      if (start >= 0) {
+        children[idx].innerHTML = x.slice(0, start) + `<span style="background-color: #72b16a">${s}</span>` + x.slice(start + s.length)
+      } else {
+        children[idx].innerHTML = x
+      }
+    })
+  }
+
+  Queue.prototype.popLeft = function () {
+    if (this.arr.length <= 0) {
+      alert('its empty!')
+      return
+    }
+    alert(this.arr.shift())
+    this.root.removeChild(this.root.firstElementChild)
+  }
+
+  Queue.prototype.popRight = function () {
+    if (this.arr.length <= 0) {
+      alert('its empty!')
+      return
+    }
+    alert(this.arr.pop())
+    this.root.removeChild(this.root.lastElementChild)
+  }
+
+  const root = document.getElementById('queue')
+
+  let q = new Queue([], root)
+
+  const buttons = document.getElementsByTagName('button')
+  addEvent(buttons[0], 'click', Queue.prototype.pushLeft.bind(q))
+  addEvent(buttons[1], 'click', Queue.prototype.pushRight.bind(q))
+  addEvent(buttons[2], 'click', Queue.prototype.popLeft.bind(q))
+  addEvent(buttons[3], 'click', Queue.prototype.popRight.bind(q))
+  addEvent(buttons[4], 'click', Queue.prototype.getTags.bind(q))
+
+  addEvent(document.getElementById('search'), 'blur', Queue.prototype.findTags.bind(q))
+  addEvent(document.getElementById('search'), 'keydown', function (e) {
+    let keyId = e.charCode || e.keyCode
+
+    let newchar = String.fromCharCode(e.charCode || e.keyCode);
+//    var key = e.which || e.keyCode;
+////    if (key === 13) { // 13 is enter
+////      // code for enter
+////    }
+    console.log(newchar)
+    if (/[\w]/.test(newchar)) {
+      newchar = event.shiftKey ? newchar.toUpperCase() : newchar.toLowerCase()
+      q.findTags(newchar)
+    } else {
+      switch (keyId) {
+        case 8:
+        case 46:
+          q.findTags('', true)
+          break;
+        default:
+          q.findTags('')
+          break;
+      }
+    }
+  })
+
+  addEvent(root, 'click', function (e) {
+    if (e.target && e.target.nodeName.toLowerCase() === 'figure') {
+//      [].forEach.app childNodes
+//      e.target
+//      root.childElementCount
+      let removeIdx = -1
+      let offsetLeft = e.x - e.offsetX
+          ;
+
+      for (let i = 0; i < root.childNodes.length; i++) {
+        let node = root.childNodes[i]
+        if (node.nodeType === 1) {
+          removeIdx++
+
+          if (node.offsetLeft === offsetLeft) {
+            q.arr.splice(removeIdx, 1)
+            root.removeChild(e.target)
+            break
+          }
+        }
+      }
+    }
+  })
+</script>
+</html>
