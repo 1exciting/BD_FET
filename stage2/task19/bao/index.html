@@ -39,6 +39,7 @@
   <button> 堆排序</button>
   <button> 希尔排序</button>
   <button> 归并排序</button>
+  <button> 基数排序</button>
 </section>
 <section class="q" id="queue">
   <!--<figure class="box">10</figure>-->
@@ -79,6 +80,7 @@
   addEvent(buttons[9], 'click', Queue.prototype.heapSort.bind(q))
   addEvent(buttons[10], 'click', Queue.prototype.shellSort.bind(q))
   addEvent(buttons[11], 'click', Queue.prototype.mergeSort.bind(q))
+  addEvent(buttons[12], 'click', Queue.prototype.radixSort.bind(q))
 
   addEvent(root, 'click', function (e) {
     if (e.target && e.target.nodeName.toLowerCase() === 'figure') {
