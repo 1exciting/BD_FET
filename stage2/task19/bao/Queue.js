@@ -417,3 +417,20 @@ Queue.prototype.mergeSort = function () {
 
 	this.replay('Merge Sort')
 }
+
+Queue.prototype.radixSort = function () {
+	let tmp = []
+	for (let i = 2, k = 10; i > 0 && k > 0; i--, k = Math.floor(k / 10)) {
+		tmp = this.arr.sort((a, b)=> {
+
+			return Math.floor(a / k) - Math.floor(b / k)
+		})
+
+		for (let i = 0; i < tmp.length; i++) (function (i, self) {
+			self.addReplay(self.setDom.bind(self, i, tmp[i]))
+		})(i, this)
+
+	}
+
+	this.replay('Radix Sort')
+}
