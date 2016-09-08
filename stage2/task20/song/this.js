@@ -66,6 +66,8 @@ var queue={
 			this.list.forEach(function(item,index){
 				if(reg.exec(item)){
 					item[1]='blue';
+				}else{
+					item[1]='red';
 				}
 			});
 			this.reload();
@@ -87,8 +89,8 @@ function addDivEvent(){
 //为进出的四个按钮添加事件
 addEvent(button[1],'click',function(){
 	var str=textArea.value.trim();
-	var str_list=str.split(/,|，|、| |\t|\n/).filter(function(item){
-		if((/[0-9a-zA-Z\u4e00-\u9fa5]+/).test(item)){
+	var str_list=str.split(/[^0-9a-zA-Z\u4e00-\u9fa5]+/).filter(function(item){
+		if((/^[0-9a-zA-Z\u4e00-\u9fa5]+$/).test(item)){
 			return true;
 		}else{
 			return false;
@@ -100,8 +102,8 @@ addEvent(button[1],'click',function(){
 });
 addEvent(button[2],'click',function(){
 	var str=textArea.value.trim();
-	var str_list=str.split(/,|，|、| |\t|\n/).filter(function(item){
-		if((/[0-9a-zA-Z\u4e00-\u9fa5]+/).test(item)){
+	var str_list=str.split(/[^0-9a-zA-Z\u4e00-\u9fa5]+/).filter(function(item){
+		if((/^[0-9a-zA-Z\u4e00-\u9fa5]+$/).test(item)){
 			return true;
 		}else{
 			return false;
