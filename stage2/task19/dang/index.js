@@ -100,14 +100,17 @@ addEventHandler(inputs[5],'click',function(){
 	}
 });
 
-//排序
+//冒泡排序
 addEventHandler(inputs[6],'click',bubbleSort.bind(this,contents));
+
+//插入排序
+addEventHandler(inputs[7],'click',insertSort.bind(this,contents));
 
 //冒泡
 function bubbleSort(contents){
-	var alists = contents.children,
+	let alists = contents.children,
 		len = alists.length,j=1, timer;
-	var i = len,
+	let i = len,
 	 	flag = false;
 	timer = setInterval(function() {
 		/*for(let k = 0; k< len;k++){
@@ -139,4 +142,75 @@ function bubbleSort(contents){
 	},50);
 }
 
+//插入排序
+//contents-- parentNode
+/*function insertSort(contents){
+ 	let lists = contents.children, 
+ 		len = lists.length,
+ 		timer;
+ 	let i = len,j = 1;
+ 	if (len<=1) {
+ 		return;
+ 	}
+ 	timer = setInterval(function(){
+ 		if (j>=len) {
+ 			clearInterval(timer)
+ 			return;
+ 		}
+ 		if (lists[j].offsetHeight<lists[j-1].offsetHeight) {
+ 			let t = lists[j].offsetHeight
+	 		let k = j-1
+	 		while(k>=0 && t<lists[k].offsetHeight) {
+	 			// let temp = lists[j].offsetHeight
+	 			lists[k+1].offsetHeight = lists[k].offsetHeight;
+				lists[k+1].style.height = lists[k].offsetHeight+"px";
+				lists[k+1].style.backgroundColor = "blue";
+				// lists[k].offsetHeight = temp
+				// lists[k].style.height = temp+'px'
+	 			k--;
+	 		}
+	 		lists[k+1].offsetHeight = t; 
+		    lists[k+1].style.height = t+"px";
+		    j++
+ 		}else{
+			j++		
+ 		}
+ 	},150);
+}*/
 
+function insertSort(queue) {
+    var eles = queue.children,
+        len  = eles.length,
+        temp, i = 1, j = 0, timer, outer = true, inner = false;
+
+    timer = setInterval(function() {
+        if(outer) {
+            if(i == len) {
+                clearInterval(timer);
+                return ;
+            }
+            if(eles[i].offsetHeight < eles[i-1].offsetHeight) {
+                temp = eles[i].offsetHeight;
+                j = i - 1;
+                outer = false;
+                inner = true;
+            } else {
+                i++;
+            }
+        }
+        if(inner) {
+            if(j < 0 || eles[j].offsetHeight < temp) {
+                eles[j+1].style.height = temp + "px";
+                eles[j+1].offsetHeight = temp;
+                i++;
+                inner = false;
+                outer = true;
+            } else {
+                eles[j+1].style.height = eles[j].style.height;
+                eles[j+1].offsetHeight = eles[j].offsetHeight;
+                eles[j+1].style.backgroundColor = "blue";
+                j--;
+            }
+        }
+    }, 50);
+};
