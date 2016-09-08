@@ -11,7 +11,7 @@ function addEventHandler(element,type,handler){
 var textarea = document.getElementById('area');
 var inputs = document.getElementsByTagName('input');
 var contents = document.getElementById('content');
-
+var arrlists = []
 //左侧人
 addEventHandler(inputs[0],'click',function(){
 	var str = textarea.value.trim();
@@ -29,47 +29,36 @@ addEventHandler(inputs[0],'click',function(){
 			var newNode = document.createElement('a');
 			newNode.textContent = item;
 			contents.appendChild(newNode);
+			arrlists.push(item);
 		});	
 	}else{
 		alert("input is invalid!")
 	}	
-	// deleteEvent(newNode);
 });
 
-addEventHandler(inputs[1],'keydown',function(){
+
+//查询按钮
+/*addEventHandler(inputs[2],'click',function(){
 	var lists = contents.children;
-	console.log(inputs[1].value)
+	console.log('key---',inputs[1].value)
 	var str = inputs[1].value.trim();
 	console.log(str)
-	for(let i = 0;i <lists.length; i++){
-		var ss = lists[i].textContent;
-		console.log(ss)
-		var ix = ss.indexOf(str);
-		console.log(ix)
-		if (ix>=0) {
-			lists[i].innerHTML=`${ss.substring(0,ix)}<span style="background-color:#1cc">
-			${ss.substring(ix,ix+ss.length)}</span>${ss.substring(ix+ss.length)}`;
-		}else{
-			lists[i].innerHTML = `${ss}`;
-		}
-	}
-})
-/*
-//
-function getFlags(str){
+	arrlists.forEach(function(ele,index){
+		lists[index].innerHTML = ele.replace(new RegExp(str,"g"),`<span style="background-color:#1cc">${str}</span>`)
+	});
+})*/
+
+//监听input keyup时间
+addEventHandler(inputs[1],'keyup',function(){
 	var lists = contents.children;
-	for(let i = 0;i <lists.length; i++){
-		var ss = lists[i].textContent;
-		console.log(ss)
-		var ix = ss.indexOf(str);
-		if (ix>=0) {
-			lists[i].innerHTML=`${ss.substring(0,ix)}<span style="background-color:#1cc">
-			${ss.substring(ix,ix+ss.length)}</span>${ss.substring(ix+ss.length)}`;
-		}else{
-			lists[i].innerHTML = ss;
-		}
-	}
-}
-*/
+	console.log('key---',inputs[1].value)
+	var str = inputs[1].value.trim();
+	console.log(str)
+	arrlists.forEach(function(ele,index){
+		lists[index].innerHTML = ele.replace(new RegExp(str,"g"),`<span style="background-color:#1cc">${str}</span>`)
+	});
+})
+
+
 
 
