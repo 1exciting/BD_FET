@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    div.box {
+      border: solid 1px #000000;
+      padding: 10px;
+      display: flex;
+      margin: 1px;
+      background-color: #fff;
+    }
+
+    div.parent {
+      /*width: 400px;*/
+      float: left;
+    }
+
+    .after-box {
+      clear: left;
+    }
+  </style>
+</head>
+<body>
+<div class="box parent" id="root">
+  Super
+  <div class="box">
+    test
+    <div class="box">
+      Apple
+      <div class="box">pear</div>
+      <div class="box">pig</div>
+      <div class="box">Human2</div>
+      <div class="box">Code2</div>
+    </div>
+    <div class="box">
+      Note
+      <div class="box">Human</div>
+      <div class="box">Code</div>
+      <div class="box">Code3</div>
+    </div>
+  </div>
+  <div class="box">
+    qwe
+    <div class="box">
+      zxc
+      <div class="box">z</div>
+      <div class="box">x</div>
+      <div class="box">c</div>
+    </div>
+    <div class="box">
+      poi
+      <div class="box">p</div>
+      <div class="box">oi</div>
+    </div>
+  </div>
+  <div class="box">
+    lll
+  </div>
+</div>
+<div class="after-box">
+  <button>遍历</button>
+  <input type="text">
+  <button>查询</button>
+</div>
+</body>
+<script>
+  const root = document.getElementById('root')
+
+  class Tree {
+    constructor(element) {
+      this.replayQueue = []
+      this.root = element
+      this.isFind = false
+      this.lock = false
+    }
+
+    _preOrder(ele) {
+      if (!ele) {
+        return
+      }
+      this.replayQueue.push(ele)
+
+      ;
+      [].forEach.call(ele.children, (child)=>this._preOrder(child))
+    }
+
+    _preOrderFind(ele, key) {
+      if (!ele || this.isFind) {
+        return
+      }
+      if (/\s*(\w+)?\s*/.exec(ele.textContent)[1] === key) {
+        this.replayQueue.push(ele)
+        this.isFind = true
+        return
+      }
+
+      this.replayQueue.push(ele)
+
+      ;
+      [].forEach.call(ele.children, (child)=>this._preOrderFind(child, key))
+    }
+
+    traverse() {
+      this.replayQueue = []
+      this._preOrder(this.root)
+      if (this.replayQueue.length) {
+        this._replay(0)
+      }
+    }
+
+    _replay(i, cb) {
+      if (i > this.replayQueue.length) {
+        cb ? cb() : {}
+        return
+      }
+      i >= this.replayQueue.length ? {} : this.replayQueue[i].style.backgroundColor = 'blue'
+      i - 1 >= 0 ? this.replayQueue[i - 1].style.backgroundColor = 'white' : {}
+
+      setTimeout(this._replay.bind(this), 500, i + 1, cb)
+    }
+
+    find(str) {
+      if (this.lock) {
+        alert('in animation')
+        return
+      }
+      this.lock = true
+      this.isFind = false
+      this.replayQueue = []
+      this._preOrderFind(this.root, str)
+
+      if (this.replayQueue.length) {
+        this._replay(0, ()=> {
+          if (this.isFind) {
+            alert(`find ${str}`)
+            this.replayQueue[this.replayQueue.length - 1].style.backgroundColor = 'red'
+          } else {
+            alert(`not find ${str}`)
+          }
+          this.lock = false
+        })
+      }
+
+
+    }
+  }
+
+  let tree = new Tree(root)
+  //  tree.traverse()
+
+  //事件绑定函数，兼容浏览器差异
+  function addEvent(element, event, listener) {
+    if (element.addEventListener) {
+      element.addEventListener(event, listener, false);
+    }
+    else if (element.attachEvent) {
+      element.attachEvent("on" + event, listener);
+    }
+    else {
+      element["on" + event] = listener;
+    }
+  }
+
+  let buttons = document.getElementsByTagName('button')
+  addEvent(buttons[0], 'click', Tree.prototype.traverse.bind(tree))
+  addEvent(buttons[1], 'click', ()=> {
+    tree.find(document.getElementsByTagName("input")[0].value)
+
+  })
+</script>
+</html>
