@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>task22</title>
+	<style>
+		div{
+			border: 1px solid #000;
+			padding: 10px;
+			display: flex;
+			margin-right:2px;
+			float: left;
+			background-color: #fff;
+		}
+	</style>
+</head>
+<body>
+	<div id="root">
+		<div>
+			<div>
+				<div></div>
+				<div></div>
+			</div>
+			<div>
+				<div></div>
+				<div></div>
+			</div>
+		</div>
+		<div>
+			<div>
+				<div></div>
+				<div></div>
+			</div>
+			<div>
+				<div></div>
+				<div></div>
+			</div>
+		</div>
+	</div>
+	<script>
+		var root = document.getElementById('root');
+		var arr=[],divArrs=[];
+
+		function levelOrder(element){
+			if(!element){
+				return;
+			}
+			arr.push(element);
+			divArrs.push(element)
+			while (arr.length!==0){
+				let el = arr.shift();
+				if(el.children){
+					[].forEach.call(el.children, function(ele){
+						arr.push(ele);
+						divArrs.push(ele);
+					});
+				}
+			}
+		}
+
+		levelOrder(root);
+
+		function changeColor() {
+			let i=0,timer;
+			divArrs[i].style.backgroundColor = 'blue';
+			timer = setInterval(function () {
+				i++;
+				if(i<divArrs.length){
+					divArrs[i].style.backgroundColor = 'blue';
+					divArrs[i-1].style.backgroundColor = '#fff';
+				}else {
+					clearInterval(timer);
+					divArrs[i-1].style.backgroundColor = '#fff';
+				}
+			},500);
+		}
+		changeColor();
+
+	</script>
+</body>
+</html>
