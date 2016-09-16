@@ -57,5 +57,9 @@
     + task 22
         * [x] [bao](https://1exciting.github.io/BD_FET/stage2/task22/bao/index.html)
         * [x] [song](https://1exciting.github.io/BD_FET/stage2/task22/song/index.html)
+        * [x] [dang](https://1exciting.github.io/BD_FET/stage2/task22/dang/index.html)
     + task 23
         * [x] [bao](https://1exciting.github.io/BD_FET/stage2/task23/bao/index.html)
+        * [x] [dang](https://1exciting.github.io/BD_FET/stage2/task23/dang/index.html)
+    + task 24
+        * [x] [bao](https://1exciting.github.io/BD_FET/stage2/task24/bao/index.html))
