@@ -104,13 +104,50 @@ addEventHandler(inputs[2],'click',function () {
     findX(tValue);
     changeColor(tValue);
 });
- 
+
+//点击时背景色
+var divs = document.getElementsByTagName('div');
+var lastDiv; //选中节点
+[].forEach.call(divs,(function(item){
+    addEventHandler(item,'click',function (event) {
+        if (lastDiv){
+            lastDiv.style.backgroundColor='#fff';
+        }
+        item.style.backgroundColor='red';
+        event.stopPropagation();
+        lastDiv = item;
+    });
+}));
 
 //删除子节点
-addEventHandler(inputs[3],'click',function(event){
-
+addEventHandler(inputs[3],'click',function(){
+    if(!lastDiv){
+        alert('请选择要删除的节点');
+    }
+    lastDiv.parentNode.removeChild(lastDiv);
 });
 //添加子节点
-addEventHandler(inputs[5],'click',function(event){
+addEventHandler(inputs[5],'click',function(){
+    let tValue = inputs[4].value.trim();
+    if(!tValue){
+        alert('输入添加节点值');
+        return;
+    }
+    if(!lastDiv){
+        alert('请选择其父节点');
+        return;
+    }
+    let newDiv = document.createElement('div');
+    newDiv.innerHTML = tValue;
+    lastDiv.appendChild(newDiv);
 
+    //为新节点添加删除点击事件
+    addEventHandler(newDiv,'click',function (event) {
+        if (lastDiv){
+            lastDiv.style.backgroundColor='#fff';
+        }
+        newDiv.style.backgroundColor='red';
+        event.stopPropagation();
+        lastDiv = newDiv;
+    });
 });
