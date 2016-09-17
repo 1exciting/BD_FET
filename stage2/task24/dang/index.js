@@ -123,8 +123,10 @@ var lastDiv; //选中节点
 addEventHandler(inputs[3],'click',function(){
     if(!lastDiv){
         alert('请选择要删除的节点');
+        return;
     }
     lastDiv.parentNode.removeChild(lastDiv);
+    lastDiv = null;
 });
 //添加子节点
 addEventHandler(inputs[5],'click',function(){
