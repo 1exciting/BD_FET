@@ -32,7 +32,7 @@ class Tree{
 		if(this.isFind||!ele){
 			return
 		}
-		if(ele.textContent.trim() === key){
+		if((/^\s*([\w\d]+)/).exec(ele.textContent)[1] === key){
 			this.replayQueue.push(ele);
 			this.isFind = true;
 			return ;

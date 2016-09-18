@@ -18,17 +18,6 @@ class Tree{
 		this.lock = false;
 		this.doing = false;
 		this._preOrder(this.root);
-		this._choose();
-	}
-	_choose(){
-		for(var i = 0; i < this.replayQueue.length; i++){
-			(function(ele){
-				addEvent(ele,'click',function(e){
-					ele.style.backgroundColor = 'blue';
-					e.stopPropagation();
-				}.bind(this));
-			})(this.replayQueue[i])
-		}
 	}
 	_preOrder(ele){
 		if(!ele){
@@ -44,7 +33,7 @@ class Tree{
 		if(this.isFind||!ele){
 			return
 		}
-		if(ele.textContent.trim() === key){
+		if((/^\s*([\w\d]+)/).exec(ele.textContent)[1] === key){
 			this.replayQueue.push(ele);
 			this.isFind = true;
 			return ;
@@ -100,12 +89,57 @@ class Tree{
       }
     }
 }
+class clickTree extends Tree{
+	constructor(element){
+		super(element);
+		this.div = null;
+		this._choose();
+	}
+	_choose(){
+		var self = this;
+		for(var i = 0; i < this.replayQueue.length; i++){
+			(function(ele){
+				addEvent(ele,'click',function(e){
+					if(self.div){
+						self.div.style.backgroundColor = 'white';
+						self.div = ele;
+					}else{
+						self.div = ele;
+					}
+					ele.style.backgroundColor = 'blue';
+					e.stopPropagation();
+				});
+			})(this.replayQueue[i])
+		}
+	}
+	delete(){
+		if(this.div){
+			this.div.parentNode.removeChild(this.div);
+			this.div = null;
+		}
+	}
+	add(str){
+		if(this.div){
+			var newNode = document.createElement('div');
+			newNode.textContent = str;
+			this.div.appendChild(newNode);
+			this._preOrder(this.root);
+			this._choose();
+		}
+	}
+}
 var root = document.getElementsByClassName('root')[0]
 var inputs = document.getElementsByTagName('input');
-var tree = new Tree(root);
+var tree = new clickTree(root);
 //tree.traverse();
 //tree.find('12')
 addEvent(inputs[0],'click',tree.traverse.bind(tree))
 addEvent(inputs[2],'click',function(){
 	return tree.find.call(tree,inputs[1].value)
+})
+addEvent(inputs[3],'click',()=>{
+	tree.delete();
+})
+addEvent(inputs[5],'click',()=>{
+	tree.add(inputs[4].value.trim())
 })
